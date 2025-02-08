@@ -7,12 +7,12 @@ public class AlizaMethods {
     //UNFINISHED
     public void sortTree(DatabaseNode root) {
         //traverse tree inorder and nodes in array
-        inOrderArray(root);
+        inorderArray(root);
         //make a new tree with the array and return it (replace old tree)
     }//end sortTree
 
     //UNTESTED
-    //iterative inorder traversal, returns array of nodes
+    //iterative inorder traversal, returns array of nodes inorder
     public DatabaseNode[] inorderArray(DatabaseNode root) {
         DatabaseNode[] treeArray = new DatabaseNode[database.countRecords(root)];
         int index = 0;
@@ -26,25 +26,25 @@ public class AlizaMethods {
         while (current != null || !stack.isEmpty()) {
             while (current != null) {
                 stack.push(current);
-                current = current.left;
+                current = current.getLeftChild();
             }
 
             current = stack.pop();
             treeArray[index] = current;
             index++;
-            current = current.right;
+            current = current.getRightChild();
         }
         return treeArray;
     }//end inorderArray
 
     //checks which node has greater sort value
     //returns greater node
-    public BoardNode getGreaterValue(Boardnode newNode, BoardNode currentNode){
+    public DatabaseNode getGreaterValue(DatabaseNode newNode, DatabaseNode currentNode){
         //needs to check by char ASCII value, so convert to lowercase
         String newLast = newNode.getLastName().toLowerCase();
-        String currentLast = newNode.getLastName().toLowerCase();
+        String currentLast = currentNode.getLastName().toLowerCase();
         String newFirst = newNode.getFirstName().toLowerCase();
-        String currentFirst = newNode.getFirstName().toLowerCase();
+        String currentFirst = currentNode.getFirstName().toLowerCase();
 
         //check last names first
         //loop until reached last character of newnode last name
@@ -58,7 +58,7 @@ public class AlizaMethods {
         }//if you reach here, last names are same
 
         //if last names are same, check first names
-        for (int i = 0; i < newLast.length(); i++){
+        for (int i = 0; i < newFirst.length(); i++){
             if (newFirst.charAt(i) < currentFirst.charAt(i)){
                 return currentNode;
             } else if (newFirst.charAt(i) > currentFirst.charAt(i)) {
@@ -74,6 +74,7 @@ public class AlizaMethods {
         }//end if/else
     }//end getGreaterValue
 
+    //adds a node to the tree using node value to choose placement
     public void addNode(DatabaseNode newNode) {
         // if tree is empty
         if (root == null) {
@@ -99,25 +100,25 @@ public class AlizaMethods {
                 System.out.println("Node is a duplicate and cannot be placed.");
                 return; // Exit the method if it's a duplicate
             }
-        }
+        }//end while
     
         // Insert the new node in the correct position
         if (getGreaterValue(newNode, parent) == parent) {//if newNode is less than parent
             parent.setLeftChild(newNode); // Set as left child
         } else {
             parent.setRightChild(newNode); // Set as right child
-        }
+        }//end if/else
     
         // Success message
         System.out.println("Record added successfully.");
         System.out.println("Your ID number is: " + newNode.getID());
-    }
+    }//end addNode
     
     // Main Method: Combines node creation and insertion
     public void addNode() {
         DatabaseNode newNode = createNode(); // Get user input to create a new node
         addNode(newNode); // Insert the new node into the tree
-    }
+    }//end addNode
 
 }//end AlizaMethods
 
