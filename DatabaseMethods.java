@@ -9,7 +9,6 @@ public class DatabaseMethods {
     DatabaseNode root; // top of tree
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
     Scanner scanner = new Scanner(System.in);
-    File myObj = new File("Phonebook.txt");
 
     public DatabaseMethods() {
         this.root = null;
@@ -23,6 +22,14 @@ public class DatabaseMethods {
     public DatabaseNode fileNode() {
         int idNum = generateID();
         String line ="";
+        String firstName = "";
+        String lastName = "";
+        String address = "";
+        String city = "";
+        String state = "";
+        int zip = 0;
+        String email = "";
+        String phNum = "";
 
         try {
             File filePhonBook = new File("Phonebook.txt");
@@ -30,22 +37,22 @@ public class DatabaseMethods {
             
             line = input.nextLine();
             String[] tokens = line.split(",");
-            String firstName = tokens[0];
-            String lastName = tokens[1];
-            String address = tokens[2];
-            String city = tokens[3];
-            String state = tokens[4];
-            String zip = tokens[5];
-            String email = tokens[6];
-            String phNum = tokens[7];
-
-            DatabaseNode contactInfo = new DatabaseNode(idNum, firstName, lastName, address, city, state, idNum, email, phNum);
-                
+            firstName = tokens[0];
+            lastName = tokens[1];
+            address = tokens[2];
+            city = tokens[3];
+            state = tokens[4];
+            zip = Integer.parseInt(tokens[5]);
+            email = tokens[6];
+            phNum = tokens[7];
             
-        } catch (FileNotFoundException e) {
-            ex.printStackTrace();
         }
-        return contactInfo;
+        
+        catch (FileNotFoundException e) {
+            System.out.println("An error has occured.");
+            e.printStackTrace();
+        }
+        return new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum);
 
     } 
     
