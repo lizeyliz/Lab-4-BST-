@@ -18,9 +18,9 @@ public class DatabaseMethods {
         return root;
     }//end getRoot
     
-    //gets a node from the file
+    //reads a node from the file
     public DatabaseNode fileNode() {
-        int idNum = generateID();
+        int idNum = 0;
         String line ="";
         String firstName = "";
         String lastName = "";
@@ -37,14 +37,15 @@ public class DatabaseMethods {
             
             line = input.nextLine();
             String[] tokens = line.split(",");
-            firstName = tokens[0];
-            lastName = tokens[1];
-            address = tokens[2];
-            city = tokens[3];
-            state = tokens[4];
-            zip = Integer.parseInt(tokens[5]);
-            email = tokens[6];
-            phNum = tokens[7];
+            idNum = Integer.parseInt(tokens[0]);
+            firstName = tokens[1];
+            lastName = tokens[2];
+            address = tokens[3];
+            city = tokens[4];
+            state = tokens[5];
+            zip = Integer.parseInt(tokens[6]);
+            email = tokens[7];
+            phNum = tokens[8];
             
         }
         
