@@ -19,7 +19,7 @@ public class DatabaseMethods {
     }//end getRoot
     
     //reads a node from the file
-    public DatabaseNode fileNode() {
+    public DatabaseNode readFileNode() {
         int idNum = 0;
         String line ="";
         String firstName = "";

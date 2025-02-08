@@ -2,7 +2,7 @@ public class SarahTest {
     public static void main(String[] args) {
         DatabaseMethods test = new DatabaseMethods();
         DatabaseNode txt = new DatabaseNode(0, null, null, null, null, null, 0, null, null);
-        txt = test.fileNode();
+        txt = test.readfileNode();
 
 
 
