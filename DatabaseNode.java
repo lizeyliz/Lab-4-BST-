@@ -5,7 +5,7 @@ public class DatabaseNode {
     private int idNum; //9 digit
     private String firstName;
     private String lastName;
-    private String addy;
+    private String address;
     private String city;
     private String state;
     private int zip;
@@ -17,11 +17,11 @@ public class DatabaseNode {
     DatabaseNode right;
     
     //constructor
-    public DatabaseNode(int idNum, String firstName, String lastName, String addy, String city, String state, int zip, String email, String phNum){
+    public DatabaseNode(int idNum, String firstName, String lastName, String address, String city, String state, int zip, String email, String phNum){
         this.idNum = idNum;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.addy = addy;
+        this.address = address; //address
         this.city = city;
         this.state = state;
         this.zip = zip;
@@ -58,13 +58,13 @@ public class DatabaseNode {
         this.lastName = newLastName;
     }//end setLastName
 
-    public String getAddy() {
-        return addy;
-    }//end getAddy
+    public String getaddress() {
+        return address;
+    }//end getaddress
 
-    public void setAddy(String newAddy) {
-        this.addy = newAddy;
-    }//end setAddy
+    public void setaddress(String newaddress) {
+        this.address = newaddress;
+    }//end setaddress
 
     public String getCity() {
         return city;
@@ -125,7 +125,7 @@ public class DatabaseNode {
     @Override
     public String toString() {
         return "\nID #" + idNum + "\n Name: " + firstName + " " + lastName
-                + "\n Address: " + addy + " " + city + ", " + state + " " + zip
+                + "\n Address: " + address + " " + city + ", " + state + " " + zip
                 + "\n Email: " + email + "\t Phone Number: " + phNum + "\n";
     }//end toString
 }//end class DatabaseNode

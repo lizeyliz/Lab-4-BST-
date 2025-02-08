@@ -27,7 +27,7 @@ public class DatabaseMethods {
         String lastName = scanner.next();
         System.out.println("Enter address:");
         scanner.nextLine();
-        String addy = scanner.nextLine();
+        String address = scanner.nextLine();
         System.out.println("Enter city:");
         String city = scanner.nextLine();
         System.out.println("Enter state:");
@@ -40,7 +40,7 @@ public class DatabaseMethods {
         String phNum = scanner.next();
         scanner.nextLine();
 
-        return new DatabaseNode (idNum, firstName, lastName, addy, city, state, zip, email, phNum);
+        return new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum);
     }// end createNode method
     
     public void addNode(DatabaseNode newNode) {
@@ -174,7 +174,7 @@ public class DatabaseMethods {
                 node.setLastName(newValue);
                 break;
             case 3:
-                node.setAddy(newValue);
+                node.setaddress(newValue);
                 break;
             case 4:
                 node.setCity(newValue);
