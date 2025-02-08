@@ -39,39 +39,85 @@ public class AlizaMethods {
 
     //checks which node has greater sort value
     //returns greater node
-    public BoardNode getGreaterValue(Boardnode newNode, BoardNode oldNode){
+    public BoardNode getGreaterValue(Boardnode newNode, BoardNode currentNode){
         //needs to check by char ASCII value, so convert to lowercase
         String newLast = newNode.getLastName().toLowerCase();
-        String oldLast = newNode.getLastName().toLowerCase();
+        String currentLast = newNode.getLastName().toLowerCase();
         String newFirst = newNode.getFirstName().toLowerCase();
-        String oldFirst = newNode.getFirstName().toLowerCase();
+        String currentFirst = newNode.getFirstName().toLowerCase();
 
         //check last names first
         //loop until reached last character of newnode last name
         //breaks when it find a difference in characters
         for (int i = 0; i < newLast.length(); i++){
-            if (newLast.charAt(i) < oldLast.charAt(i)){
-                return oldNode;
-            } else if (newLast.charAt(i) > oldLast.charAt(i)) {
+            if (newLast.charAt(i) < currentLast.charAt(i)){
+                return currentNode;
+            } else if (newLast.charAt(i) > currentLast.charAt(i)) {
                 return newNode;
             }//end if/else
         }//if you reach here, last names are same
 
         //if last names are same, check first names
         for (int i = 0; i < newLast.length(); i++){
-            if (newFirst.charAt(i) < oldFirst.charAt(i)){
-                return oldNode;
-            } else if (newFirst.charAt(i) > oldFirst.charAt(i)) {
+            if (newFirst.charAt(i) < currentFirst.charAt(i)){
+                return currentNode;
+            } else if (newFirst.charAt(i) > currentFirst.charAt(i)) {
                 return newNode;
             }
         }//if you reach here, first names are same
 
         //if first names are same, sort by ID
-        if (newNode.getID() < oldNode.getID()){
-            return oldNode;
+        if (newNode.getID() < currentNode.getID()){
+            return currentNode;
         } else {
             return newNode;
         }//end if/else
     }//end getGreaterValue
+
+    public void addNode(DatabaseNode newNode) {
+        // if tree is empty
+        if (root == null) {
+            root = newNode;
+            System.out.println("Record added successfully.");
+            System.out.println("ID number is: " + newNode.getID());
+            return; // end method here if root == null
+        }
+    
+        // starting from the top
+        DatabaseNode current = root;
+        DatabaseNode parent = null;
+    
+        // while loop for placement if tree is not empty
+        while (current != null) {
+            parent = current;
+            if (getGreaterValue(newNode, current) == current) {  //if newNode is less than current node
+                current = current.getLeftChild(); // Move left
+            } else if (getGreaterValue(newNode, current) == newNode) {//if newNode is greater than current node
+                current = current.getRightChild(); // Move right
+            } else {
+                // Duplicate node found
+                System.out.println("Node is a duplicate and cannot be placed.");
+                return; // Exit the method if it's a duplicate
+            }
+        }
+    
+        // Insert the new node in the correct position
+        if (getGreaterValue(newNode, parent) == parent) {//if newNode is less than parent
+            parent.setLeftChild(newNode); // Set as left child
+        } else {
+            parent.setRightChild(newNode); // Set as right child
+        }
+    
+        // Success message
+        System.out.println("Record added successfully.");
+        System.out.println("Your ID number is: " + newNode.getID());
+    }
+    
+    // Main Method: Combines node creation and insertion
+    public void addNode() {
+        DatabaseNode newNode = createNode(); // Get user input to create a new node
+        addNode(newNode); // Insert the new node into the tree
+    }
+
 }//end AlizaMethods
 
