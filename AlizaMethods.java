@@ -36,5 +36,43 @@ public class AlizaMethods {
         }
         return treeArray;
     }//end inorderArray
+
+    //checks which node has greater value by checking first character of each name
+    //if first character is same, checks next character
+    //if last name same, check first name
+    //if both names same, sort by ID
+    //returns greater name
+    public BoardNode getGreaterValue(Boardnode newNode, BoardNode oldNode){
+        //needs to check by char ASCII value, so convert to lowercase
+        String newLast = newNode.getLastName().toLowerCase();
+        String oldLast = newNode.getLastName().toLowerCase();
+        //loop until reached last character of newnode last name
+        for (int i = 0; i < newLast.length(); i++){
+            if (newLast.charAt(i) < oldLast.charAt(i)){
+                return oldNode;
+            } else if (newLast.charAt(i) > oldLast.charAt(i)) {
+                return newNode;
+            }
+        }//if you reach here, last names are same
+
+        //if last names are same, check first names
+        String newFirst = newNode.getFirstName().toLowerCase();
+        String oldFirst = newNode.getFirstName().toLowerCase();
+        //loop until reached last character of newnode last name
+        for (int i = 0; i < newLast.length(); i++){
+            if (newFirst.charAt(i) < oldFirst.charAt(i)){
+                return oldNode;
+            } else if (newFirst.charAt(i) > oldFirst.charAt(i)) {
+                return newNode;
+            }
+        }//if you reach here, first names are same
+
+        //if first names are same, sort by ID
+        if (newNode.getID() < oldNode.getID()){
+            return oldNode;
+        } else {
+            return newNode;
+        }//end if/else
+    }//end getGreaterValue
 }//end AlizaMethods
 
