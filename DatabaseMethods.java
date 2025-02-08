@@ -3,12 +3,16 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DatabaseMethods {
 
     DatabaseNode root; // top of tree
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
     Scanner scanner = new Scanner(System.in);
+
+    
 
     public DatabaseMethods() {
         this.root = null;
@@ -17,6 +21,29 @@ public class DatabaseMethods {
     public DatabaseNode getRoot() {
         return root;
     }//end getRoot
+
+    public void writeToFile(DatabaseNode contactInfo){
+        try {
+            FileWriter myWriter = new FileWriter("Phonebook.txt");
+            myWriter.write(contactInfo.getID() + "," + 
+            contactInfo.getFirstName() + "," + 
+            contactInfo.getLastName() + "," + 
+            contactInfo.getaddress() + "," + 
+            contactInfo.getCity() + "," + 
+            contactInfo.getState() + "," + 
+            contactInfo.getZip() + "," + 
+            contactInfo.getEmail() + "," + 
+            contactInfo.getPhNum());
+
+            myWriter.close();
+            System.out.println("Succesfully written into the file.");
+            
+        } catch (IOException e) {
+            System.out.println("An error has occured.");
+            e.printStackTrace();
+        }
+
+    }
     
     //reads a node from the file
     public DatabaseNode readFileNode() {
@@ -30,7 +57,6 @@ public class DatabaseMethods {
         int zip = 0;
         String email = "";
         String phNum = "";
-
         try {
             File filePhonBook = new File("Phonebook.txt");
             Scanner input = new Scanner(filePhonBook);
@@ -45,8 +71,7 @@ public class DatabaseMethods {
             state = tokens[5];
             zip = Integer.parseInt(tokens[6]);
             email = tokens[7];
-            phNum = tokens[8];
-            
+            phNum = tokens[8];   
         }
         
         catch (FileNotFoundException e) {
