@@ -1,5 +1,5 @@
 import java.util.Stack;
-
+//will need to update add search and delete methods
 public class AlizaMethods {
     DatabaseMethods database = new DatabaseMethods();
     //sort the tree
@@ -37,28 +37,27 @@ public class AlizaMethods {
         return treeArray;
     }//end inorderArray
 
-    //checks which node has greater value by checking first character of each name
-    //if first character is same, checks next character
-    //if last name same, check first name
-    //if both names same, sort by ID
-    //returns greater name
+    //checks which node has greater sort value
+    //returns greater node
     public BoardNode getGreaterValue(Boardnode newNode, BoardNode oldNode){
         //needs to check by char ASCII value, so convert to lowercase
         String newLast = newNode.getLastName().toLowerCase();
         String oldLast = newNode.getLastName().toLowerCase();
+        String newFirst = newNode.getFirstName().toLowerCase();
+        String oldFirst = newNode.getFirstName().toLowerCase();
+
+        //check last names first
         //loop until reached last character of newnode last name
+        //breaks when it find a difference in characters
         for (int i = 0; i < newLast.length(); i++){
             if (newLast.charAt(i) < oldLast.charAt(i)){
                 return oldNode;
             } else if (newLast.charAt(i) > oldLast.charAt(i)) {
                 return newNode;
-            }
+            }//end if/else
         }//if you reach here, last names are same
 
         //if last names are same, check first names
-        String newFirst = newNode.getFirstName().toLowerCase();
-        String oldFirst = newNode.getFirstName().toLowerCase();
-        //loop until reached last character of newnode last name
         for (int i = 0; i < newLast.length(); i++){
             if (newFirst.charAt(i) < oldFirst.charAt(i)){
                 return oldNode;
