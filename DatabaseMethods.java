@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class DatabaseMethods {
 
@@ -12,8 +12,6 @@ public class DatabaseMethods {
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
     public ArrayList<DatabaseNode> contactInfoList = new ArrayList<>(); //stores all the nodes to avoid overwritting
     Scanner scanner = new Scanner(System.in);
-
-    
 
     public DatabaseMethods() {
         this.root = null;
@@ -23,6 +21,8 @@ public class DatabaseMethods {
         return root;
     }//end getRoot
 
+    //puts all nodes into the txt file
+    //turn tree into array and write to file
     public void writeToFile(DatabaseNode contactInfo){
         try {
             FileWriter myWriter = new FileWriter("Phonebook.txt");
@@ -50,17 +50,14 @@ public class DatabaseMethods {
 
             myWriter.close();
             System.out.println("Succesfully written into the file.");
-            
         } catch (IOException e) {
             System.out.println("An error has occured.");
             e.printStackTrace();
-        }
-
-    }
+        }//end try/catch
+    }//end writeToFile method
     
-    //reads any nodes from the files and 
+    //reads any nodes from the files and adds to tree (need to fix so it adds to tree and not just list)
     public void readFileNodes() {
-        
         try {
             File filePhonBook = new File("Phonebook.txt");
             Scanner input = new Scanner(filePhonBook);
@@ -79,21 +76,16 @@ public class DatabaseMethods {
                 String phNum = tokens[8];   
 
                 contactInfoList.add(new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum));
+                //test code
                 System.out.print(new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum));
 
-            }
-            
-            
-        }
-        
-        catch (FileNotFoundException e) {
+            }//end while loop   
+        } catch (FileNotFoundException e) {
             System.out.println("An error has occured.");
             e.printStackTrace();
-        }
-        //return ;
-
-
-    } 
+        }//end try/catch
+    } //end readFileNodes method
+    
     //create a node from user input
     public DatabaseNode createNode() {
         int idNum = generateID();
@@ -330,8 +322,6 @@ public class DatabaseMethods {
             } // end if statement
         } // end while loop
     }// end printPreorder method
-
-
 
 // IN ORDER TRAVERSAL //
     public void printInOrder(DatabaseNode node) { // INORDER TRAVERSAL
