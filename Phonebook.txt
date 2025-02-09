@@ -1,4 +1,3 @@
 663784765,Harry,Potter,Hogwarts,London,England,26655945,harryporrter@go.com, 256-859-62458;
-21584681,Tommy,Innit,DSMP,Brighton,London,26546,tommyinnit@yahoo.com, 568/985/65684;
-269857941,Sarah,Sparvier,216 kjcb;ws,bellingham,wa,98225,sarsar@gmailcom,24/654/65498
-77159817,Techno,Blade,Antartic Commune,Snow,Hi,35695,technotheblade@gmail.com,321-65198-5644654
+256843154, Techno,Blade,Antartic Emppire, DSMP, EarthSMP, 3216548, technotheblade@gmail.com, 35164-654-684;
+358689452, Obi-wan, Kenobi, Dunes, Mos Espa, Tatooine, 66666, obiwankenobi@theforce.com, 3359-361-56448
