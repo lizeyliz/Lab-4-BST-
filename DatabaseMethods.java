@@ -10,6 +10,7 @@ public class DatabaseMethods {
 
     DatabaseNode root; // top of tree
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
+    public ArrayList<DatabaseNode> contactInfoList = new ArrayList<>(); //stores all the nodes to avoid overwritting
     Scanner scanner = new Scanner(System.in);
 
     
@@ -25,6 +26,18 @@ public class DatabaseMethods {
     public void writeToFile(DatabaseNode contactInfo){
         try {
             FileWriter myWriter = new FileWriter("Phonebook.txt");
+            //write the other stuff in here
+            for (int i = 0; i < contactInfoList.size(); i++) { //write everything saved into the list into the file
+                myWriter.write(contactInfoList.get(i).getID() + "," + 
+                contactInfoList.get(i).getFirstName() + "," + 
+                contactInfoList.get(i).getLastName() + "," + 
+                contactInfoList.get(i).getaddress() + "," + 
+                contactInfoList.get(i).getCity() + "," + 
+                contactInfoList.get(i).getState() + "," + 
+                contactInfoList.get(i).getZip() + "," + 
+                contactInfoList.get(i).getEmail() + "," + 
+                contactInfoList.get(i).getPhNum() + "\n");
+            }
             myWriter.write(contactInfo.getID() + "," + 
             contactInfo.getFirstName() + "," + 
             contactInfo.getLastName() + "," + 
@@ -45,43 +58,42 @@ public class DatabaseMethods {
 
     }
     
-    //reads a node from the file
-    public DatabaseNode readFileNode() {
-        int idNum = 0;
-        String line ="";
-        String firstName = "";
-        String lastName = "";
-        String address = "";
-        String city = "";
-        String state = "";
-        int zip = 0;
-        String email = "";
-        String phNum = "";
+    //reads any nodes from the files and 
+    public void readFileNodes() {
+        
         try {
             File filePhonBook = new File("Phonebook.txt");
             Scanner input = new Scanner(filePhonBook);
+
+            while(input.hasNextLine()) {
+                String line = input.nextLine();
+                String[] tokens = line.split(",");
+                int idNum = Integer.parseInt(tokens[0]);
+                String firstName = tokens[1];
+                String lastName = tokens[2];
+                String address = tokens[3];
+                String city = tokens[4];
+                String state = tokens[5];
+                int zip = Integer.parseInt(tokens[6]);
+                String email = tokens[7];
+                String phNum = tokens[8];   
+
+                contactInfoList.add(new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum));
+                System.out.print(new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum));
+
+            }
             
-            line = input.nextLine();
-            String[] tokens = line.split(",");
-            idNum = Integer.parseInt(tokens[0]);
-            firstName = tokens[1];
-            lastName = tokens[2];
-            address = tokens[3];
-            city = tokens[4];
-            state = tokens[5];
-            zip = Integer.parseInt(tokens[6]);
-            email = tokens[7];
-            phNum = tokens[8];   
+            
         }
         
         catch (FileNotFoundException e) {
             System.out.println("An error has occured.");
             e.printStackTrace();
         }
-        return new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum);
+        //return ;
+
 
     } 
-    
     //create a node from user input
     public DatabaseNode createNode() {
         int idNum = generateID();
