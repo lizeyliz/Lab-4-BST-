@@ -86,103 +86,101 @@ public class DatabaseMethods {
             String beforeString = null;
             String line = null;
 
+            //initialize variables to store contact info
+            int idNum = 0;
+            String firstName = null;
+            String lastName = null;
+            String address = null;
+            String city = null;
+            String state = null;
+            int zip = 0;
+            String email = null;
+            String phNum = null;
+
+            //read until end of file and get contact info
             while(reader.hasNextLine()) {
-                /*String line = reader.nextLine();
-                String[] tokens = line.split(",");
-                int idNum = Integer.parseInt(tokens[0]);
-                String firstName = tokens[1];
-                String lastName = tokens[2];
-                String address = tokens[3];
-                String city = tokens[4];
-                String state = tokens[5];
-                int zip = Integer.parseInt(tokens[5]);
-                String email = tokens[7];
-                String phNum = tokens[8];*/ 
+                //read ID number
+                beforeString = "ID #";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    idNum = Integer.parseInt(data);
+                }//end if statement
                 
-                    //read ID number
-                    beforeString = "ID #";
+                //read first name
+                beforeString = "First Name: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    firstName = data;
+                }//end if statement
+
+                //read last name
+                beforeString = "Last Name: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    lastName = data;
+                }//end if statement
+
+                //read address
+                beforeString = "Address: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    address = data;
+                }//end if statement
+
+                //read city
+                beforeString = "City: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    city = data;
+                }//end if statement
+
+                //read state
+                beforeString = "State: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    state = data;
+                }//end if statement
+
+                //read zip code
+                beforeString = "Zip Code: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    zip = Integer.parseInt(data);
+                }//end if statement
+
+                //read email
+                beforeString = "Email: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    email = data;
+                }//end if statement
+
+                //read phone number
+                beforeString = "Phone #: ";
+                line = reader.nextLine();
+                if (line.contains(beforeString)) {
+                    String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                    phNum = data;
+                }//end if statement
+
+                //read empty line
+                if (reader.hasNextLine()) {
                     line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-                    
-                    //read first name
-                    beforeString = "First Name: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println("First Name: " + data);
-                    }//end if statement
-
-                    //read last name
-                    beforeString = "Last Name: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read address
-                    beforeString = "Address: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read city
-                    beforeString = "City: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read state
-                    beforeString = "State: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read zip code
-                    beforeString = "Zip Code: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read email
-                    beforeString = "Email: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read phone number
-                    beforeString = "Phone #: ";
-                    line = reader.nextLine();
-                    if (line.contains(beforeString)) {
-                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
-                        System.out.println(data);
-                    }//end if statement
-
-                    //read empty line
-                    if (reader.hasNextLine()) {
-                        line = reader.nextLine();
-                    }//end if statement
-                    System.out.println();
-
-
+                }//end if statement
+                System.out.println();
 
                 //create node to add to tree
-                //DatabaseNode newNode = new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum);
+                DatabaseNode newNode = new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum);
                 //add it to tree
-                //addNode(newNode);
+                addNode(newNode);
             }//end while loop   
         } catch (FileNotFoundException e) {
             System.out.println("An error has occured.");
