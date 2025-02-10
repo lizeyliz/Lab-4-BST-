@@ -216,7 +216,6 @@ public class DatabaseMethods {
     
     //checks which node has greater sort value
     //returns greater node
-    //not sure this works correctly
     public DatabaseNode getGreaterValue(DatabaseNode newNode, DatabaseNode currentNode){
         //needs to check by char ASCII value, so convert to lowercase
         String newLast = newNode.getLastName().toLowerCase();
@@ -252,7 +251,54 @@ public class DatabaseMethods {
         }//end if/else
     }//end getGreaterValue
 
+    //adds a node to the tree using node value to choose placement (alphabetical order by last name)
     public void addNode(DatabaseNode newNode) {
+        // if tree is empty
+        if (root == null) {
+            root = newNode;
+            System.out.println("Record added successfully.");
+            System.out.println("ID number is: " + newNode.getID());
+            return; // end method here if root == null
+        }
+    
+        // starting from the top
+        DatabaseNode current = root;
+        DatabaseNode parent = null;
+    
+        // while loop for placement if tree is not empty
+        while (current != null) {
+            parent = current;
+            if (getGreaterValue(newNode, current) == current) {  //if newNode is less than current node
+                current = current.getLeftChild(); // Move left
+            } else if (getGreaterValue(newNode, current) == newNode) {//if newNode is greater than current node
+                current = current.getRightChild(); // Move right
+            } else {
+                // Duplicate node found
+                System.out.println("Node is a duplicate and cannot be placed.");
+                return; // Exit the method if it's a duplicate
+            }
+        }//end while
+    
+        // Insert the new node in the correct position
+        if (getGreaterValue(newNode, parent) == parent) {//if newNode is less than parent
+            parent.setLeftChild(newNode); // Set as left child
+        } else {
+            parent.setRightChild(newNode); // Set as right child
+        }//end if/else
+    
+        // Success message
+        System.out.println("Record added successfully.");
+        System.out.println("Your ID number is: " + newNode.getID());
+    }//end addNode
+    
+    // Main Method: Combines node creation and insertion
+    public void addNode() {
+        DatabaseNode newNode = createNode(); // Get user input to create a new node
+        addNode(newNode); // Insert the new node into the tree
+    }//end addNode
+
+    //old addNode method that sorted by idnumber
+    /*public void addNode(DatabaseNode newNode) {
         // if tree is empty
         if (root == null) {
             root = newNode;
@@ -295,7 +341,7 @@ public class DatabaseMethods {
     public void addNode() {
         DatabaseNode newNode = createNode(); // Get user input to create a new node
         addNode(newNode); // Insert the new node into the tree
-    }
+    }*/
 
     // DELETE method //
     public void deleteNode() {

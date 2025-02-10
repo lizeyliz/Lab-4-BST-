@@ -21,7 +21,6 @@ public class DatabaseTest {
             int choice = scanner.nextInt();
             
             scanner.nextLine(); // Consume newline
-
             switch (choice) {
                 case 1:  // ADD method
                     database.addNode();
