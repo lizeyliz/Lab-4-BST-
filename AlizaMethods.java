@@ -11,31 +11,6 @@ public class AlizaMethods {
         //make a new tree with the array and return it (replace old tree)
     }//end sortTree
 
-    //UNTESTED
-    //iterative inorder traversal, returns array of nodes inorder
-    public DatabaseNode[] inorderArray(DatabaseNode root) {
-        DatabaseNode[] treeArray = new DatabaseNode[database.countRecords(root)];
-        int index = 0;
-        if (root == null) {
-            return treeArray;//returns empty array
-        }
-
-        Stack<DatabaseNode> stack = new Stack<>();
-        DatabaseNode current = root;
-
-        while (current != null || !stack.isEmpty()) {
-            while (current != null) {
-                stack.push(current);
-                current = current.getLeftChild();
-            }
-
-            current = stack.pop();
-            treeArray[index] = current;
-            index++;
-            current = current.getRightChild();
-        }
-        return treeArray;
-    }//end inorderArray
 
     //checks which node has greater sort value
     //returns greater node

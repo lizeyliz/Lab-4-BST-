@@ -10,7 +10,7 @@ public class DatabaseMethods {
 
     DatabaseNode root; // top of tree
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
-    public ArrayList<DatabaseNode> contactInfoList = new ArrayList<>(); //stores all the nodes to avoid overwritting
+    //public ArrayList<DatabaseNode> contactInfoList = new ArrayList<>(); //stores all the nodes to avoid overwritting
     Scanner scanner = new Scanner(System.in);
 
     public DatabaseMethods() {
@@ -21,33 +21,55 @@ public class DatabaseMethods {
         return root;
     }//end getRoot
 
+    //UNTESTED (test with print statements)
+    //iterative inorder traversal, returns array of nodes inorder
+    public DatabaseNode[] inorderArray(DatabaseNode root) {
+        //initialize array to store nodes (size of tree)
+        DatabaseNode[] treeArray = new DatabaseNode[countRecords(root)];
+        int index = 0;//start at beginning of array
+        if (root == null) { //tree is empty
+            return treeArray;//returns empty array
+        }//end if statement
+        
+        //traverse inorder
+        Stack<DatabaseNode> stack = new Stack<>(); //stack to hold nodes
+        DatabaseNode current = root; //start at root
+
+        while (current != null || !stack.isEmpty()) {
+            //add left children to stack
+            while (current != null) {
+                stack.push(current);
+                current = current.getLeftChild();
+            }//end inner while loop
+
+            current = stack.pop();
+            treeArray[index] = current;
+            index++;
+            //add right children to stack
+            current = current.getRightChild();
+        }//end outer while loop
+        return treeArray;
+    }//end inorderArray
+
     //puts all nodes into the txt file
     //turn tree into array and write to file
     public void writeToFile(DatabaseNode contactInfo){
+        //put contact nodes from tree into array (inorder)
+        DatabaseNode[] contactArray = inorderArray(root);
         try {
             FileWriter myWriter = new FileWriter("Phonebook.txt");
             //write the other stuff in here
-            for (int i = 0; i < contactInfoList.size(); i++) { //write everything saved into the list into the file
-                myWriter.write(contactInfoList.get(i).getID() + "," + 
-                contactInfoList.get(i).getFirstName() + "," + 
-                contactInfoList.get(i).getLastName() + "," + 
-                contactInfoList.get(i).getaddress() + "," + 
-                contactInfoList.get(i).getCity() + "," + 
-                contactInfoList.get(i).getState() + "," + 
-                contactInfoList.get(i).getZip() + "," + 
-                contactInfoList.get(i).getEmail() + "," + 
-                contactInfoList.get(i).getPhNum() + "\n");
-            }
-            myWriter.write(contactInfo.getID() + "," + 
-            contactInfo.getFirstName() + "," + 
-            contactInfo.getLastName() + "," + 
-            contactInfo.getaddress() + "," + 
-            contactInfo.getCity() + "," + 
-            contactInfo.getState() + "," + 
-            contactInfo.getZip() + "," + 
-            contactInfo.getEmail() + "," + 
-            contactInfo.getPhNum());
-
+            for (int i = 0; i < contactArray.length; i++) { //write everything saved into the list into the file
+                myWriter.write(contactArray[i].getID() + "," + 
+                contactArray[i].getFirstName() + "," + 
+                contactArray[i].getLastName() + "," + 
+                contactArray[i].getaddress() + "," + 
+                contactArray[i].getCity() + "," + 
+                contactArray[i].getState() + "," + 
+                contactArray[i].getZip() + "," + 
+                contactArray[i].getEmail() + "," + 
+                contactArray[i].getPhNum() + "\n");
+            }//end for loop
             myWriter.close();
             System.out.println("Succesfully written into the file.");
         } catch (IOException e) {
@@ -56,14 +78,16 @@ public class DatabaseMethods {
         }//end try/catch
     }//end writeToFile method
     
-    //reads any nodes from the files and adds to tree (need to fix so it adds to tree and not just list)
-    public void readFileNodes() {
+    //reads nodes from the files and adds to tree
+    public void addFromFile() {
         try {
-            File filePhonBook = new File("Phonebook.txt");
-            Scanner input = new Scanner(filePhonBook);
+            File phoneBookFile = new File("Phonebook2.txt");
+            Scanner reader = new Scanner(phoneBookFile);
+            String beforeString = null;
+            String line = null;
 
-            while(input.hasNextLine()) {
-                String line = input.nextLine();
+            while(reader.hasNextLine()) {
+                /*String line = reader.nextLine();
                 String[] tokens = line.split(",");
                 int idNum = Integer.parseInt(tokens[0]);
                 String firstName = tokens[1];
@@ -71,20 +95,100 @@ public class DatabaseMethods {
                 String address = tokens[3];
                 String city = tokens[4];
                 String state = tokens[5];
-                int zip = Integer.parseInt(tokens[6]);
+                int zip = Integer.parseInt(tokens[5]);
                 String email = tokens[7];
-                String phNum = tokens[8];   
+                String phNum = tokens[8];*/ 
+                
+                    //read ID number
+                    beforeString = "ID #";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+                    
+                    //read first name
+                    beforeString = "First Name: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println("First Name: " + data);
+                    }//end if statement
 
-                contactInfoList.add(new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum));
-                //test code
-                System.out.print(new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum));
+                    //read last name
+                    beforeString = "Last Name: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
 
+                    //read address
+                    beforeString = "Address: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read city
+                    beforeString = "City: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read state
+                    beforeString = "State: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read zip code
+                    beforeString = "Zip Code: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read email
+                    beforeString = "Email: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read phone number
+                    beforeString = "Phone #: ";
+                    line = reader.nextLine();
+                    if (line.contains(beforeString)) {
+                        String data = line.substring(line.indexOf(beforeString) + beforeString.length());
+                        System.out.println(data);
+                    }//end if statement
+
+                    //read empty line
+                    if (reader.hasNextLine()) {
+                        line = reader.nextLine();
+                    }//end if statement
+                    System.out.println();
+
+
+
+                //create node to add to tree
+                //DatabaseNode newNode = new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum);
+                //add it to tree
+                //addNode(newNode);
             }//end while loop   
         } catch (FileNotFoundException e) {
             System.out.println("An error has occured.");
             e.printStackTrace();
         }//end try/catch
-    } //end readFileNodes method
+    } //end addFromFile method
     
     //create a node from user input
     public DatabaseNode createNode() {

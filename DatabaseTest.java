@@ -5,6 +5,9 @@ public class DatabaseTest {
         DatabaseMethods database = new DatabaseMethods();
         //initialize the scanner
         Scanner scanner = new Scanner(System.in);
+
+        //add nodes from file
+        database.addFromFile();
         //user menu
         while (true) {
             System.out.println("Menu:");
