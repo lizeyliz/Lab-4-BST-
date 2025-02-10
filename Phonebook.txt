@@ -1,3 +1,29 @@
-663784765,Harry,Potter,Hogwarts,London,England,26655,harryporrter@go.com, 256-859-62458;
-256843154,Techno,Blade,Antartic Emppire, DSMP, EarthSMP, 32168, technotheblade@gmail.com, 35164-654-684;
-358689452,Obi-wan,Kenobi,Dunes, Mos Espa, Tatooine, 66666, obiwankenobi@theforce.com, 3359-361-56448
+ID #663784765
+First Name: Kendrick 
+Last Name: Grimes
+Address: 2700 E 3rd Ave
+City: Denver
+State: Colorado
+Zip Code: 80206
+Email: kgrimes@gmail.com
+Phone #: (720) 596-4360
+
+ID #256843154
+First Name: Patricia 
+Last Name: Emard
+Address: 5137 W Chicago Ave
+City: Chicago
+State: Illinois
+Zip Code: 60651
+Email: pemard@hotmail.com
+Phone #: (773) 379-7548
+
+ID #358689452
+First Name: Jimmy 
+Last Name: Schaden
+Address: 8401 Main St
+City: Edmonds
+State: Washington
+Zip Code: 98026
+Email: jschaden@gmail.com
+Phone #: (425) 712-0363

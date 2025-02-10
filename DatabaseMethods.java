@@ -81,7 +81,7 @@ public class DatabaseMethods {
     //reads nodes from the files and adds to tree
     public void addFromFile() {
         try {
-            File phoneBookFile = new File("Phonebook2.txt");
+            File phoneBookFile = new File("Phonebook.txt");
             Scanner reader = new Scanner(phoneBookFile);
             String beforeString = null;
             String line = null;
