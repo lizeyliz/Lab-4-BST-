@@ -21,8 +21,8 @@ public class DatabaseMethods {
         return root;
     }//end getRoot
 
-    //UNTESTED (test with print statements)
     //iterative inorder traversal, returns array of nodes inorder
+    //currently orders by ID number, want to change to alphabetical order by last name
     public DatabaseNode[] inorderArray(DatabaseNode root) {
         //initialize array to store nodes (size of tree)
         DatabaseNode[] treeArray = new DatabaseNode[countRecords(root)];
@@ -214,6 +214,44 @@ public class DatabaseMethods {
         return new DatabaseNode (idNum, firstName, lastName, address, city, state, zip, email, phNum);
     }// end createNode method
     
+    //checks which node has greater sort value
+    //returns greater node
+    //not sure this works correctly
+    public DatabaseNode getGreaterValue(DatabaseNode newNode, DatabaseNode currentNode){
+        //needs to check by char ASCII value, so convert to lowercase
+        String newLast = newNode.getLastName().toLowerCase();
+        String currentLast = currentNode.getLastName().toLowerCase();
+        String newFirst = newNode.getFirstName().toLowerCase();
+        String currentFirst = currentNode.getFirstName().toLowerCase();
+
+        //check last names first
+        //loop until reached last character of newnode last name
+        //breaks when it find a difference in characters
+        for (int i = 0; i < newLast.length(); i++){
+            if (newLast.charAt(i) < currentLast.charAt(i)){
+                return currentNode;
+            } else if (newLast.charAt(i) > currentLast.charAt(i)) {
+                return newNode;
+            }//end if/else
+        }//if you reach here, last names are same
+
+        //if last names are same, check first names
+        for (int i = 0; i < newFirst.length(); i++){
+            if (newFirst.charAt(i) < currentFirst.charAt(i)){
+                return currentNode;
+            } else if (newFirst.charAt(i) > currentFirst.charAt(i)) {
+                return newNode;
+            }
+        }//if you reach here, first names are same
+
+        //if first names are same, sort by ID
+        if (newNode.getID() < currentNode.getID()){
+            return currentNode;
+        } else {
+            return newNode;
+        }//end if/else
+    }//end getGreaterValue
+
     public void addNode(DatabaseNode newNode) {
         // if tree is empty
         if (root == null) {

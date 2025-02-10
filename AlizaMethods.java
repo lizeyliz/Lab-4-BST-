@@ -4,13 +4,12 @@ public class AlizaMethods {
     DatabaseMethods database = new DatabaseMethods();
     //sort the tree
     //takes in root of tree
-    //UNFINISHED
-    public void sortTree(DatabaseNode root) {
+    //UNFINISHED (not sure we need this)
+    /*public void sortTree(DatabaseNode root) {
         //traverse tree inorder and nodes in array
         inorderArray(root);
         //make a new tree with the array and return it (replace old tree)
-    }//end sortTree
-
+    }//end sortTree*/
 
     //checks which node has greater sort value
     //returns greater node
