@@ -51,24 +51,23 @@ public class DatabaseMethods {
         return treeArray;
     }//end inorderArray
 
-    //puts all nodes into the txt file
-    //turn tree into array and write to file
-    public void writeToFile(DatabaseNode contactInfo){
+    //puts all contact nodes from the tree into the txt file
+    public void writeToFile(){
         //put contact nodes from tree into array (inorder)
         DatabaseNode[] contactArray = inorderArray(root);
         try {
             FileWriter myWriter = new FileWriter("Phonebook.txt");
-            //write the other stuff in here
-            for (int i = 0; i < contactArray.length; i++) { //write everything saved into the list into the file
-                myWriter.write(contactArray[i].getID() + "," + 
-                contactArray[i].getFirstName() + "," + 
-                contactArray[i].getLastName() + "," + 
-                contactArray[i].getaddress() + "," + 
-                contactArray[i].getCity() + "," + 
-                contactArray[i].getState() + "," + 
-                contactArray[i].getZip() + "," + 
-                contactArray[i].getEmail() + "," + 
-                contactArray[i].getPhNum() + "\n");
+            //write all contacts into file in alphabetical order according to last name
+            for (int i = 0; i < contactArray.length; i++) {
+                myWriter.write("ID #" + contactArray[i].getID() + "\n" + 
+                "First Name: " + contactArray[i].getFirstName() + "\n" + 
+                "Last Name: " + contactArray[i].getLastName() + "\n" + 
+                "Address: " + contactArray[i].getaddress() + "\n" + 
+                "City: " + contactArray[i].getCity() + "\n" + 
+                "State: " + contactArray[i].getState() + "\n" + 
+                "Zip Code: " + contactArray[i].getZip() + "\n" + 
+                "Email: " + contactArray[i].getEmail() + "\n" + 
+                "Phone #: " + contactArray[i].getPhNum() + "\n\n");
             }//end for loop
             myWriter.close();
             System.out.println("Succesfully written into the file.");
@@ -78,7 +77,7 @@ public class DatabaseMethods {
         }//end try/catch
     }//end writeToFile method
     
-    //reads nodes from the files and adds to tree
+    //reads contact nodes from the files and adds to tree
     public void addFromFile() {
         try {
             File phoneBookFile = new File("Phonebook.txt");
@@ -181,7 +180,8 @@ public class DatabaseMethods {
                 DatabaseNode newNode = new DatabaseNode(idNum, firstName, lastName, address, city, state, zip, email, phNum);
                 //add it to tree
                 addNode(newNode);
-            }//end while loop   
+            }//end while loop
+            reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error has occured.");
             e.printStackTrace();

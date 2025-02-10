@@ -1,13 +1,3 @@
-ID #663784765
-First Name: Kendrick 
-Last Name: Grimes
-Address: 2700 E 3rd Ave
-City: Denver
-State: Colorado
-Zip Code: 80206
-Email: kgrimes@gmail.com
-Phone #: (720) 596-4360
-
 ID #256843154
 First Name: Patricia 
 Last Name: Emard
@@ -27,3 +17,24 @@ State: Washington
 Zip Code: 98026
 Email: jschaden@gmail.com
 Phone #: (425) 712-0363
+
+ID #663784765
+First Name: Kendrick 
+Last Name: Grimes
+Address: 2700 E 3rd Ave
+City: Denver
+State: Colorado
+Zip Code: 80206
+Email: kgrimes@gmail.com
+Phone #: (720) 596-4360
+
+ID #715843929
+First Name: Balton
+Last Name: Rouge
+Address: 9320 Burbank Dr
+City: Seattle
+State: Washington
+Zip Code: 98115
+Email: brouge@gmail.com
+Phone #: (206)624-6454
+

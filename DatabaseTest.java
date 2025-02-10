@@ -40,6 +40,7 @@ public class DatabaseTest {
                         + database.countRecords(database.getRoot()));
                     break;
                 case 6:
+                    database.writeToFile();//write to file
                     System.out.println("Exiting...");
                     scanner.close();
                     System.exit(0);
