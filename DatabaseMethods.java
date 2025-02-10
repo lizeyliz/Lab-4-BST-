@@ -7,10 +7,8 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DatabaseMethods {
-
     DatabaseNode root; // top of tree
     ArrayList<Integer> listIDs = new ArrayList<>(); // stores all IDs
-    //public ArrayList<DatabaseNode> contactInfoList = new ArrayList<>(); //stores all the nodes to avoid overwritting
     Scanner scanner = new Scanner(System.in);
 
     public DatabaseMethods() {
@@ -22,7 +20,6 @@ public class DatabaseMethods {
     }//end getRoot
 
     //iterative inorder traversal, returns array of nodes inorder
-    //currently orders by ID number, want to change to alphabetical order by last name
     public DatabaseNode[] inorderArray(DatabaseNode root) {
         //initialize array to store nodes (size of tree)
         DatabaseNode[] treeArray = new DatabaseNode[countRecords(root)];
@@ -252,7 +249,7 @@ public class DatabaseMethods {
     }//end getGreaterValue
 
     //adds a node to the tree using node value to choose placement (alphabetical order by last name)
-    public void addNode(DatabaseNode newNode) {
+    /*public void addNode(DatabaseNode newNode) {
         // if tree is empty
         if (root == null) {
             root = newNode;
@@ -295,10 +292,10 @@ public class DatabaseMethods {
     public void addNode() {
         DatabaseNode newNode = createNode(); // Get user input to create a new node
         addNode(newNode); // Insert the new node into the tree
-    }//end addNode
+    }//end addNode*/
 
-    //old addNode method that sorted by idnumber
-    /*public void addNode(DatabaseNode newNode) {
+    //old addNode method that's sorted by idnumber
+    public void addNode(DatabaseNode newNode) {
         // if tree is empty
         if (root == null) {
             root = newNode;
@@ -341,9 +338,10 @@ public class DatabaseMethods {
     public void addNode() {
         DatabaseNode newNode = createNode(); // Get user input to create a new node
         addNode(newNode); // Insert the new node into the tree
-    }*/
+    }
 
-    // DELETE method //
+        // DELETE method //
+    //deletes by ID number
     public void deleteNode() {
         System.out.print("Enter ID number of record you want to delete: ");
         int idNum = scanner.nextInt();
@@ -395,7 +393,62 @@ public class DatabaseMethods {
 
         return root;
     }
-    // end DELETE method //
+    // end IDNUM DELETE method //
+
+    // DELETE method //
+    //currently deletes by ID number, want to change to delete by last name
+    /*public void deleteNode() {
+        System.out.print("Enter last name of contact you want to delete: ");
+        String lastName = scanner.next();
+        scanner.nextLine(); // Consume newline
+
+          // Check if the node exists before attempting deletion
+        if (search(idNum, root) == null) {
+        System.out.println("Record with ID " + idNum + " not found.");
+        return;
+        }
+
+        root = delete(root, idNum);
+        System.out.println("Record deleted successfully.");
+    }
+ 
+    //Recursive delete helper method
+    private DatabaseNode delete(DatabaseNode root, int idNum) {
+    
+       // Base case: if the tree is empty
+        if (root == null) {
+            return null;
+        }
+
+        // Traverse the tree to find the node to delete
+        if (idNum < root.getID()) {
+            root.left = delete(root.left, idNum);
+        } else if (idNum > root.getID()) {
+            root.right = delete(root.right, idNum);
+        } else {
+            // Found the node to delete
+            // Case 1: No child (leaf node)
+            if (root.left == null && root.right == null) {
+                return null;
+            }
+            // Case 2: One child
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+            // Case 3: Two children
+            DatabaseNode successor = findMin(root.right);
+            root.setID(successor.getID()); // Replace the value
+            root.right = delete(root.right, successor.getID()); // Remove successor
+            //System.out.println("Record deleted successfully.");
+        }
+           //root = delete(root, idNum);
+       //System.out.println("Record deleted successfully.");
+
+        return root;
+    }
+    // end DELETE method / */
 
     // MODIFY method //
     public void modifyNode() {
@@ -566,6 +619,7 @@ public class DatabaseMethods {
         return node;
     }
 
+    //searches for a node with a specific ID number
     private DatabaseNode search(int idNum, DatabaseNode node) {
         if (node == null || node.getID() == idNum) {
             return node;
@@ -576,6 +630,18 @@ public class DatabaseMethods {
             return search(idNum, node.right);
         }
     }//end search
+
+    //searches by last name (should be able to  return multiple nodes with same last name)
+    /*private DatabaseNode search(int idNum, DatabaseNode node) {
+        if (node == null || node.getID() == idNum) {
+            return node;
+        }
+        if (idNum < node.getID()) {
+            return search(idNum, node.left);
+        } else {
+            return search(idNum, node.right);
+        }
+    }//end search*/
 
     //generate random ID number
     public int generateID() {
