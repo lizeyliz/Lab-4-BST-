@@ -8,6 +8,8 @@ public class DatabaseTest {
 
         //add nodes from file
         database.addFromFile();
+
+        database.userMethods(scanner, database);
         
     } // end main
 }  // end Test Class file
