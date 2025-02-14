@@ -507,17 +507,60 @@ public class DatabaseMethods {
 
     // LOOKUP method
     public void lookupNode() {
-        System.out.print("Enter ID number to lookup: ");
-        int idNum = scanner.nextInt();
-        scanner.nextLine(); // to get next line
+        int idNum;
+        while(true){
+            try {
+                System.out.print("Enter ID number to lookup: ");
+                idNum = scanner.nextInt();
+                scanner.nextLine(); // to get next line
+                break;
+            } catch (Exception InputMismatchException) {
+                System.out.println("Please enter an integer.");
+                scanner.nextLine();
+                continue;
+            }//end try/catch
+        }//end while loop
 
         DatabaseNode node = search(idNum, root);
         if (node == null) {
             System.out.println("Record not found.");
             return;
         }
+        while(true){
+            try {
+                System.out.println("Which order would you like to use?");
+                System.out.println("1) Pre-order");
+                System.out.println("2) Post-order");
+                System.out.println("3) In-order");
 
-        System.out.print("Enter order (preorder, inorder or postorder): ");
+                int choice = scanner.nextInt();
+                switch(choice) {
+                    case 1://preorder
+                    printPreorder(root);
+                    break;
+
+                    case 2://postorder
+                    printPostOrder();
+                    break;
+
+                    case 3://inorder
+                    printInOrder(root);
+                    break;
+
+                    default://number not in range (exception catching)
+                    System.out.println("Please enter an integer 1-3.");
+                    scanner.nextLine();
+                    continue;
+                }//end switch/case
+            } catch (Exception InputMismatchException) {
+                System.out.println("Please enter an integer 1-3.");
+                scanner.nextLine();
+                continue;
+            }//end try/catch
+            break;
+        }//end while loop
+
+        /*System.out.print("Enter order (preorder, inorder or postorder): ");
         String order = scanner.nextLine();
 
         if (order.equalsIgnoreCase("preorder")) {
@@ -529,7 +572,7 @@ public class DatabaseMethods {
         } else {
             System.out.println("Invalid order. Please choose either "
                 + "'preorder', 'inorder' or 'postorder'.");
-        }
+        }*/
         System.out.println();
     }
 
