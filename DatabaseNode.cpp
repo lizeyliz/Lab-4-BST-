@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 class DatabaseNode {
     private:
     //instance variables
