@@ -15,6 +15,20 @@ class AlizaMethods {
 
     }//end inorderArray*/
 
+    //inorder traversal: takes in root
+    void printInOrder(DatabaseNode* node){
+        if(node == nullptr){
+            return; //tree is empty
+        }//end if statement
+
+        //left tree
+        printInOrder(node->left);
+        //print the current node
+        std::cout << node->toString();
+        //right tree
+        printInOrder(node->right);
+    }//end printInOrder
+
     //add a node to BST based on id number
     void addNode(DatabaseNode* newNode) {
         //if tree is empty
