@@ -1,6 +1,7 @@
 #include "DatabaseNode.cpp"
 #include <iostream>
 class AlizaMethods {
+    public:
     DatabaseNode* root = nullptr;
         //puts all contact nodes from the tree into the txt file
     //needs inorderArray method first
@@ -9,7 +10,6 @@ class AlizaMethods {
     DatabaseNode[] contactArray = inorderArray(root);
 
     }*/
-    public:
     ////iterative inorder traversal, returns array of nodes inorder
     /*DatabaseNode* inorderArray(DatabaseNode root) {
 
@@ -66,3 +66,13 @@ class AlizaMethods {
         std::cout << "Your ID number is: " + newNode->getIdNum();
     }//end addNode
 };//end class AlizaMethods
+int main(){
+    //initialize class
+    AlizaMethods aliza;
+    DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
+    "pemard@hotmail.com", "(773) 379-7548");
+    //aliza.addNode(node1);
+    //aliza.printInOrder(aliza.root);
+    std::cout<< node1->toString();
+    return 0;
+}
