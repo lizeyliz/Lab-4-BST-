@@ -53,8 +53,6 @@ void readFromFile(){
     std::string email;
     std::string phNum;
 
-    
-
     ContactsList.open("Phonebook.txt");
     
     //read from txt file
@@ -108,8 +106,12 @@ void readFromFile(){
                     substring = "Phone Number:";
                     phNum = line.substr(substring.length(), line.length());
                 }
-            }
 
+                DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
+                //add node to tree
+                
+            }
+            
         } 
        
     }
