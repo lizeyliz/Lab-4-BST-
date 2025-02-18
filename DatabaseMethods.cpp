@@ -38,95 +38,91 @@ void createNode() {
 
 //reads the stuff from the file, puts them into the binary tree
 void readFromFile(){ 
-     //used for the output of the tx file
-    AlizaMethods tree;
+    //used for the output of the tx file
+   AlizaMethods tree;
 
-    std::fstream ContactsList;
-    std::string line;
-    std::string substring;
-    int ID;
-    std::string firstName;
-    std::string lastName; 
-    std::string address;
-    std::string city;
-    std::string state;
-    int zip;
-    std::string email;
-    std::string phNum;
+   std::fstream ContactsList;
+   std::string line;
+   std::string substring;
+   int ID;
+   std::string firstName;
+   std::string lastName; 
+   std::string address;
+   std::string city;
+   std::string state;
+   int zip;
+   std::string email;
+   std::string phNum = "null";
+   std::string data;
 
-    ContactsList.open("Phonebook.txt");
-    
-    //read from txt file
+   ContactsList.open("Phonebook.txt");
+   
+   //read from txt file
 
-    if(ContactsList.is_open()) {
+   if(ContactsList.is_open()) {
+       
+       while (ContactsList.good()) {
         
-        while (ContactsList) {
-            //id
-            substring = "ID#";
-            if (getline(ContactsList, line)) {
-                //if(line.find("ID#") != std::string::npos) { //checks if ID# is there
-                ID = std::stoi(line.substr(substring.length(), line.length()));
-            } //end of if statements
-            
-            //first name
-            substring = "First Name: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("First Name: ") != std::string::npos) {
-                firstName = line.substr(substring.length(), line.length());
-            } //    end of if statements
-            
-            //last name
-            substring = "Last Name: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("Last Name: ") != std::string::npos) {
-                lastName = line.substr(substring.length(), line.length());
-            } //end of if statements
-            
-            //address
-            substring = "Address: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("Address: ") != std::string::npos) {
-                address = line.substr(substring.length(), line.length());
-            } //end of if statements
-            
-            //city
-            substring = "City: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("City: ") != std::string::npos) {
-                city = line.substr(substring.length(), line.length());
-            } //end of if statements
-            
-            //state
-            substring = "State: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("State: ") != std::string::npos) {
-                state = line.substr(substring.length(), line.length());
-            } //end of if statements
-            
-            //zipcode
-            substring = "Zip Code: ";
-            if(getline(ContactsList, line)) { 
-                //if(line.find("Zip Code: ") != std::string::npos) {
-                zip = std::stoi(line.substr(substring.length(), line.length()));
-            } //end of if statements
-            
-            //email
-            substring = "Email: ";
-            if(getline(ContactsList, line)) {
-                //if(line.find("Email: ") != std::string::npos) {
-                email = line.substr(substring.length(), line.length());
-            } //end of if statements
-            
-            //phone number
-            substring = "Phone #:";
-            if(getline(ContactsList, line)) {
-                //if(line.find("Phone #: ") != std::string::npos) {
-                phNum = line.substr(substring.length(), line.length());
-            } //end of if statements
+        while(getline(ContactsList, line)) {
 
-            DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
-            DatabaseNode* contactPtr = &contact;
-            tree.addNode(contactPtr);
+            phNum = "null";
+
+            if (line.find("ID #") != std::string::npos) {
+                data = line.substr(4);
+                ID = std::stoi(data);
+                //std::cout << ID << std::endl;
             }
-        } 
-    }      
+            if (line.find("First Name: ") != std::string::npos) {
+                data = line.substr(12);
+                firstName = data;
+                //std::cout << firstName << std::endl;
+            }
+            if (line.find("Last Name: ") != std::string::npos) {
+                data = line.substr(11);
+                lastName = data;
+                //std::cout << lastName << std::endl;
+            }
+            if(line.find("Address: ") != std::string::npos) {
+                data = line.substr(9);
+                address = data;
+                //std::cout << address << std::endl;
+            }
+            if (line.find("City: ") != std::string::npos) {
+                data = line.substr(6);
+                city = data;
+               // std::cout << city << std::endl;
+            }
+            if (line.find("State: ") != std::string::npos) {
+                data = line.substr(7);
+                state = data;
+                //std::cout << state << std::endl;
+            }
+            if (line.find("Zip Code: ") != std::string::npos) {
+                data = line.substr(10);
+                zip = std::stoi(data);
+                //std::cout << zip << std::endl;
+            }
+            if (line.find("Email: ") != std::string::npos) {
+                data = line.substr(7);
+                email = data;
+                //std::cout << email << std::endl;
+            }
+            if (line.find("Phone #: ") != std::string::npos) {
+                data = line.substr(9);
+                phNum = data;
+                //std::cout << phNum << std::endl;
+            }
+            if (phNum != "null") { //so that a node will only be created once all the values are saved
+                DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
+                std::cout << contact.toString();
+                DatabaseNode* contactPtr = &contact;
+                tree.addNode(contactPtr);  
+            }                  
+        }
+    }
+} else {
+    std::cout <<"unable to open file";
+}
+ContactsList.close();
+} ;    
+
