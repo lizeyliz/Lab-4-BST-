@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "DatabaseNode.h"
+#include "AlizaMethods.cpp"
 
 void createNode() {
 
@@ -39,6 +39,7 @@ void createNode() {
 //reads the stuff from the file, puts them into the binary tree
 void readFromFile(){ 
      //used for the output of the tx file
+    AlizaMethods tree;
 
     std::fstream ContactsList;
     std::string line;
@@ -60,66 +61,72 @@ void readFromFile(){
     if(ContactsList.is_open()) {
         
         while (ContactsList) {
-            while (getline(ContactsList, line)) {
-                //id
-                if(line.find("ID#") != std::string::npos) { //checks if ID# is there
-                    substring = "ID#";
-                    ID = std::stoi(line.substr(substring.length(), line.length()));
-                }
-                //first name
-                if(line.find("First Name: ") != std::string::npos) {
-                    substring = "First Name: ";
-                    firstName = line.substr(substring.length(), line.length());
-                }
-                //last name
-                if(line.find("Last Name: ") != std::string::npos) {
-                    substring = "Last Name: ";
-                    lastName = line.substr(substring.length(), line.length());
-                }
-                //address
-                if(line.find("Address: ") != std::string::npos) {
-                    substring = "Address: ";
-                    address = line.substr(substring.length(), line.length());
-                }
-                //city
-                if(line.find("City: ") != std::string::npos) {
-                    substring = "City: ";
-                    city = line.substr(substring.length(), line.length());
-                }
-                //state
-                if(line.find("State: ") != std::string::npos) {
-                    substring = "State: ";
-                    state = line.substr(substring.length(), line.length());
-                }
-                //zip 
-                if(line.find("Zip: ") != std::string::npos) {
-                    substring = "Zip: ";
-                    zip = std::stoi(line.substr(substring.length(), line.length()));
-                }
-                //email
-                if(line.find("Email: ") != std::string::npos) {
-                    substring = "Email:";
-                    email = line.substr(substring.length(), line.length());
-                }
-                //phone number
-                if(line.find("Phone #: ") != std::string::npos) {
-                    substring = "Phone Number:";
-                    phNum = line.substr(substring.length(), line.length());
-                }
-
-                DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
-                //add node to tree
-                
-            }
+            //id
+            substring = "ID#";
+            if (getline(ContactsList, line)) {
+                //if(line.find("ID#") != std::string::npos) { //checks if ID# is there
+                ID = std::stoi(line.substr(substring.length(), line.length()));
+            } //end of if statements
             
+            //first name
+            substring = "First Name: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("First Name: ") != std::string::npos) {
+                firstName = line.substr(substring.length(), line.length());
+            } //    end of if statements
+            
+            //last name
+            substring = "Last Name: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("Last Name: ") != std::string::npos) {
+                lastName = line.substr(substring.length(), line.length());
+            } //end of if statements
+            
+            //address
+            substring = "Address: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("Address: ") != std::string::npos) {
+                address = line.substr(substring.length(), line.length());
+            } //end of if statements
+            
+            //city
+            substring = "City: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("City: ") != std::string::npos) {
+                city = line.substr(substring.length(), line.length());
+            } //end of if statements
+            
+            //state
+            substring = "State: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("State: ") != std::string::npos) {
+                state = line.substr(substring.length(), line.length());
+            } //end of if statements
+            
+            //zipcode
+            substring = "Zip Code: ";
+            if(getline(ContactsList, line)) { 
+                //if(line.find("Zip Code: ") != std::string::npos) {
+                zip = std::stoi(line.substr(substring.length(), line.length()));
+            } //end of if statements
+            
+            //email
+            substring = "Email: ";
+            if(getline(ContactsList, line)) {
+                //if(line.find("Email: ") != std::string::npos) {
+                email = line.substr(substring.length(), line.length());
+            } //end of if statements
+            
+            //phone number
+            substring = "Phone #:";
+            if(getline(ContactsList, line)) {
+                //if(line.find("Phone #: ") != std::string::npos) {
+                phNum = line.substr(substring.length(), line.length());
+            } //end of if statements
+
+            DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
+            DatabaseNode* contactPtr = &contact;
+            tree.addNode(contactPtr);
+            }
         } 
-       
-    }
-        
-}
-
-
-int main() {
-    readFromFile();
-    return 0;
-}
+    }      
