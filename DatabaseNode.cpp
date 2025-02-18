@@ -90,6 +90,6 @@ class DatabaseNode {
 
     //to string (may change later)
     std::string toString(){
-        return std::to_string(idNum) + " " + firstName + " " + lastName + " " + address + " " + city + " " + state + " " + std::to_string(zip) + " " + email + " " + phNum;
+        return std::to_string(idNum) + " " + firstName + " " + lastName + " " + address + " " + city + " " + state + " " + std::to_string(zip) + " " + email + " " + phNum +"\n";
     }
 };

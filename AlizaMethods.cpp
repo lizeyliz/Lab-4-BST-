@@ -1,78 +1,112 @@
-#include "DatabaseNode.cpp"
+#include <string>
 #include <iostream>
+
+class DatabaseNode {
+public:
+    int idNum;
+    std::string firstName;
+    std::string lastName;
+    std::string address;
+    std::string city;
+    std::string state;
+    int zip;
+    std::string email;
+    std::string phone;
+    DatabaseNode* left;
+    DatabaseNode* right;
+
+    DatabaseNode(int id, std::string fName, std::string lName, std::string addr, std::string c, std::string s, int z, std::string e, std::string p)
+        : idNum(id), firstName(fName), lastName(lName), address(addr), city(c), state(s), zip(z), email(e), phone(p), left(nullptr), right(nullptr) {}
+
+    int getIdNum() {
+        return idNum;
+    }
+
+    std::string toString() {
+        return firstName + " " + lastName + ", " + address + ", " + city + ", " + state + " " + std::to_string(zip) + ", " + email + ", " + phone + "\n";
+    }
+};
+
 class AlizaMethods {
-    public:
-    DatabaseNode* root = nullptr;
-        //puts all contact nodes from the tree into the txt file
-    //needs inorderArray method first
-    /*void writeToFile() {
-    //put contact nodes from tree into array (inorder)
-    DatabaseNode[] contactArray = inorderArray(root);
+public:
+    DatabaseNode* root;
 
-    }*/
-    ////iterative inorder traversal, returns array of nodes inorder
-    /*DatabaseNode* inorderArray(DatabaseNode root) {
+    // Constructor
+    AlizaMethods() {
+        root = nullptr;
+    }
 
-    }//end inorderArray*/
+    // Destructor to prevent memory leaks
+    ~AlizaMethods() {
+        deleteTree(root);
+    }
 
-    //inorder traversal: takes in root
-    void printInOrder(DatabaseNode* node){
-        if(node == nullptr){
-            return; //tree is empty
-        }//end if statement
+    void deleteTree(DatabaseNode* node) {
+        if (node == nullptr) return;
+        deleteTree(node->left);
+        deleteTree(node->right);
+        delete node;  // Free memory
+    }
 
-        //left tree
+    // In-order traversal: takes in root
+    void printInOrder(DatabaseNode* node) {
+        if (node == nullptr) {
+            return; // Tree is empty
+        }
         printInOrder(node->left);
-        //print the current node
         std::cout << node->toString();
-        //right tree
         printInOrder(node->right);
-    }//end printInOrder
+    }
 
-    //add a node to BST based on id number
+    // Add a node to BST based on ID number
     void addNode(DatabaseNode* newNode) {
-        //if tree is empty
-        if(root == nullptr) {
+        if (root == nullptr) {
             root = newNode;
-            std::cout << "Record added successfully.";
-            std::cout << "Your ID number is: " + newNode->getIdNum();
+            std::cout << "Record added successfully.\n";
+            std::cout << "Your ID number is: " << newNode->getIdNum() << "\n";
             return;
-        }//end if statement
+        }
 
-        //starting from the top
         DatabaseNode* current = root;
         DatabaseNode* parent = nullptr;
 
-        //while loop for placement if the tree is not empty
-        while(current != nullptr) {
+        while (current != nullptr) {
             parent = current;
-            if(newNode->getIdNum() < current->getIdNum()) {
-                current = current->left; //move left
-            } else if (newNode->getIdNum() > current->getIdNum()){
-                current = current->right; //move right
-            } else {//duplicate node
-                std::cout << "Node is a duplicate and cannot be placed.";
+            if (newNode->getIdNum() < current->getIdNum()) {
+                current = current->left;  // Move left
+            } else if (newNode->getIdNum() > current->getIdNum()) {
+                current = current->right; // Move right
+            } else { // Duplicate node
+                std::cout << "Node is a duplicate and cannot be placed.\n";
                 return;
-            }//end if/else
-        }//end while loop
+            }
+        }
 
-        //insert the new node in the correct position
-        if(newNode->getIdNum() < parent->getIdNum()){
-            parent->left = newNode;//set as left child
+        if (newNode->getIdNum() < parent->getIdNum()) {
+            parent->left = newNode;
         } else {
-            parent->right = newNode; //set as right child
-        }//end if/else
-        std::cout << "Record added successfully.";
-        std::cout << "Your ID number is: " + newNode->getIdNum();
-    }//end addNode
-};//end class AlizaMethods
-int main(){
-    //initialize class
+            parent->right = newNode;
+        }
+        std::cout << "Record added successfully.\n";
+        std::cout << "Your ID number is: " << newNode->getIdNum() << "\n";
+    }
+};
+
+int main() {
+    // Initialize class
     AlizaMethods aliza;
+
     DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
-    "pemard@hotmail.com", "(773) 379-7548");
-    //aliza.addNode(node1);
-    //aliza.printInOrder(aliza.root);
-    std::cout<< node1->toString();
+        "pemard@hotmail.com", "(773) 379-7548");
+
+    DatabaseNode* node2 = new DatabaseNode(156843154, "Sarah", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
+        "semard@hotmail.com", "(773) 379-7548");
+
+    aliza.addNode(node1);
+    aliza.addNode(node2);
+
+    std::cout << "\nPrinting database in order:\n";
+    aliza.printInOrder(aliza.root);
+
     return 0;
 }
