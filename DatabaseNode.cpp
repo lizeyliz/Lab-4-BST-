@@ -1,5 +1,6 @@
+
 #include <string>
-#include <iostream>
+#include "DatabaseNode.h"
 class DatabaseNode {
     private:
     //instance variables
@@ -87,8 +88,7 @@ class DatabaseNode {
     void setPhNum(std::string phNum){
         this->phNum = phNum;
     }
-
-    //to string (may change later)
+ //to string (may change later)
     std::string toString(){
         return std::to_string(idNum) + " " + firstName + " " + lastName + " " + address + " " + city + " " + state + " " + std::to_string(zip) + " " + email + " " + phNum +"\n";
     }

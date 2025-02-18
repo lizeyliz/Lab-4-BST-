@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "DatabaseNode.cpp"
+#include "DatabaseNode.h"
 
 void createNode() {
 
