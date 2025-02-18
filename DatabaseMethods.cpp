@@ -4,8 +4,9 @@
 #include "AlizaMethods.cpp"
 
 void createNode() {
+    AlizaMethods tree;
 
-    int ID = 3;
+    int ID = 3; //generate id num
     std::string firstName;
     std::string lastName;
     std::string address;
@@ -15,25 +16,34 @@ void createNode() {
     std::string email;
     std::string phNum;
 
-    std::cout << "Enter first name:";
-    std::cin >> firstName;
-    std::cout << "Enter last name:";
-    std::cin >> lastName;
-    std::cout << "Enter address:";
-    std::cin >> address;
-    std::cout << "Enter city:";
-    std::cin >> city;
+    std::cout << "Enter first name: ";
+    //std::cin >> firstName;
+    getline(std::cin, firstName);
+    std::cout << "Enter last name: ";
+    //std::cin >> lastName;
+    getline(std::cin, lastName);
+    std::cout << "Enter address: ";
+    //std::cin >> address;
+    getline(std::cin, address);
+    std::cout << "Enter city: ";
+    //std::cin >> city;
+    getline(std::cin, city);
     std::cout << "Enter state:";
-    std::cin >> state;
+    //std::cin >> state;
+    getline(std::cin, state);
     std::cout << "Enter zipcode:";
     std::cin >> zip;
+    //getline(std::cin, zip);
     std::cout << "Enter email:";
     std::cin >> email;
+    //getline(std::cin, email);
     std::cout << "Enter phone number:";
-    std::cin >> phNum;
+    getline(std::cin, phNum);
+    //std::cin >> phNum;
 
-    DatabaseNode test(ID, firstName, lastName, address, city, state, zip, email, phNum);
-    
+    DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
+    DatabaseNode* ptr = &contact; 
+    tree.addNode(ptr);
 }
 
 //reads the stuff from the file, puts them into the binary tree
@@ -125,4 +135,5 @@ void readFromFile(){
 }
 ContactsList.close();
 } ;    
+
 
