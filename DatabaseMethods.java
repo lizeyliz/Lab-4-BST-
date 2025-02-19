@@ -660,7 +660,7 @@ public class DatabaseMethods {
             node = node.left;
         }
         return node;
-    }
+    }//end findMin
 
     //searches for a node with a specific ID number: takes in id number and root
     private DatabaseNode search(int idNum, DatabaseNode node) {

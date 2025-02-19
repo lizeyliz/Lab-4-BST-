@@ -478,6 +478,14 @@ public:
             return search(idNum, node->right);
         }
     }//end search
+
+    //finds node with minimum id num
+    DatabaseNode* findMin(DatabaseNode* node){
+        while (node->left != nullptr) {
+            node = node->left;
+        }//end while loop
+        return node;
+    }//end finMin
 };//end class DatabaseMethods
 
 
@@ -492,11 +500,12 @@ int main() {
     //db.printInOrder(db.root);
     //cout << "\n Printing database in pre-order: \n";
     //db.printPreOrder(db.root);
-    cout << "\n Printing database in post-order: \n";
-    db.printPostOrder();
 
     cout<< "searching for node 3\n";
     cout<< db.search(3, db.root)->toString();
+
+    cout<< "node with lowest id num in tree\n";
+    cout << db.findMin(db.root)->toString();
 
     db.writeToFile();
 
