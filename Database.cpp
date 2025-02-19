@@ -120,6 +120,36 @@ public:
         printInOrder(node->right);
     }//end printInOrder
 
+    // print PREORDER TRAVERSAL using Iteration: takes in root
+    void printPreOrder(DatabaseNode* node) {
+        if (root == nullptr){//BST empty
+            return;
+        }//end if
+
+        // creating a stack to hold tree values
+        stack<DatabaseNode*> preorder;
+        // put the root in the stack
+        preorder.push(root);
+
+        //run until stack is empty
+        while(!preorder.empty()){
+            // remove current node from stack (so no repeats) and print it
+            DatabaseNode* current = preorder.top();//return the top node
+            preorder.pop();//delete the top node
+            cout << current->toString() + " ";
+
+            // do right subtree first (bc stacks are read opposite way they are added to)
+            if (current->right != nullptr) {
+                preorder.push(current->right); // adding right side values to stack
+            } // end if statement
+
+            // left subtree
+            if (current->left != nullptr) {
+                preorder.push(current->left);// adding left side values to stack
+            } // end if statement
+        }//end while loop
+    }//end printPreOrder
+
     // Add a node to BST based on ID number
     void addNode(DatabaseNode* newNode) {
         if (root == nullptr) {
