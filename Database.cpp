@@ -334,6 +334,7 @@ public:
         std::cin >> zip;
         std::cout << "Enter email: \n";
         getline(std::cin, email);
+        getline(std::cin, phNum);
         std::cout << "Enter phone number: \n";
         getline(std::cin, phNum);
       
