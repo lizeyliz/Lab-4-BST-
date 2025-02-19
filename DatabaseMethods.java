@@ -540,22 +540,8 @@ public class DatabaseMethods {
             }//end try/catch
             break;
         }//end while loop
-
-        /*System.out.print("Enter order (preorder, inorder or postorder): ");
-        String order = scanner.nextLine();
-
-        if (order.equalsIgnoreCase("preorder")) {
-            printPreorder(root);
-        } else if (order.equalsIgnoreCase("inorder")) {
-            printInOrder(root);
-        } else if (order.equalsIgnoreCase("postorder")) {
-            printPostOrder();
-        } else {
-            System.out.println("Invalid order. Please choose either "
-                + "'preorder', 'inorder' or 'postorder'.");
-        }*/
         System.out.println();
-    }
+    }//end printPhoneBook
 
     // print PREORDER TRAVERSAL using Iteration//
     public void printPreorder(DatabaseNode root) {
