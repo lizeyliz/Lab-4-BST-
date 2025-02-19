@@ -3,13 +3,13 @@
 - CS 240
 - 2/19/25
 ## Purpose
-This program creates an address book of people and their contact information that can be sorted 3 ways (inorder, preorder, postorder). A user can add, delete, and modify a record providing they know the record key. The number of records (nodes) can be counted.
+This program creates an address book of people and their contact information that can be sorted 3 ways (inorder, preorder, postorder). Users can add, delete, and modify a record provided they know the ID number. The number of records (nodes) can be counted.
 ## Improvements
 This lab is improving on the BST lab we did last quarter. Link: https://github.com/lizeyliz/6-Binary-Search-Tree.git
-- Created a version of lab in C++
+- Created a version of the lab in C++
 - adding a text file to hold contacts with input/output
 - Changed split lookupNode into printTree and lookup node methods (more accurately represents purpose)
-- added more execption catching
+- added more exception catching
 - made user menu into method in DatabaseMethods (to clean up main)
 
 ## Sources 
