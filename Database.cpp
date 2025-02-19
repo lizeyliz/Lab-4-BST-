@@ -149,6 +149,12 @@ public:
         std::cout << "Record added successfully.\n";
         std::cout << "Your ID number is: " << newNode->getIdNum() << "\n";
     }//end addNode
+
+    // Main Method: Combines node creation and insertion
+    void addNode() {
+        DatabaseNode* newNode = createNode(); // Get user input to create a new node
+        addNode(newNode); // Insert the new node into the tree
+    }//end addNode
     
     void userMethods(){
         while(true) {
@@ -286,7 +292,7 @@ public:
                     if (phNum != "null") { //so that a node will only be created once all the values are saved
                         idNums.push_front(ID); //add IDs to list
                         DatabaseNode* contact = new DatabaseNode(ID, firstName, lastName, address, city, state, zip, email, phNum);
-                        std::cout << contact->toString();
+                        //std::cout << contact->toString();
                         addNode(contact);  
                     }//end if statements                
                 }//end while loop
@@ -297,7 +303,8 @@ public:
         ContactsList.close();
     }//end readFromFile
     
-    void createNode() {
+    //creates a node and returns it
+    DatabaseNode* createNode() {
         int ID = generateIdNum(); //generate id num
         std::string firstName;
         std::string lastName;
@@ -327,24 +334,21 @@ public:
       
     
         idNums.push_front(ID);
-        DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
-        DatabaseNode* ptr = &contact; 
-        addNode(ptr);
+        DatabaseNode* contact = new DatabaseNode(ID, firstName, lastName, address, city, state, zip, email, phNum);
+        return contact;
     }//end createNode
+
+
+    //puts all contact nodes from the tree into the txt file
+    void writeToFile(){
+
+    }
 };//end class DatabaseMethods
 
 //main method
 int main() {
     DatabaseMethods db;
 
-    /*DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
-        "pemard@hotmail.com", "(773) 379-7548");
-
-    DatabaseNode* node2 = new DatabaseNode(156843154, "Sarah", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
-        "semard@hotmail.com", "(773) 379-7548");*/
-
-    //db.addNode(node1);
-    //db.addNode(node2);
     db.readFromFile(); //add nodes from text file
 
     std::cout << "\nPrinting database in order:\n";
