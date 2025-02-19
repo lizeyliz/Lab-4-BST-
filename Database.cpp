@@ -92,43 +92,29 @@ class DatabaseNode {
     void setPhNum(std::string phNum){
         this->phNum = phNum;
     }
- //to string (may change later)
+    //to string (may change later)
     std::string toString(){
         return std::to_string(idNum) + " " + firstName + " " + lastName + " " + address + " " + city + " " + state + " " + std::to_string(zip) + " " + email + " " + phNum +"\n";
-    }
-};
+    }//end toString
+};//end class DatabaseNode
 
-
-class AlizaMethods {
+class DatabaseMethods {
 public:
-    DatabaseNode* root;
 
-    // Constructor
-    AlizaMethods() {
-        root = nullptr;
-    }
+    std::list<int> idNums;
 
-    // Destructor to prevent memory leaks
-    ~AlizaMethods() {
-        deleteTree(root);
-    }
-
-    void deleteTree(DatabaseNode* node) {
-        if (node == nullptr) return;
-        deleteTree(node->left);
-        deleteTree(node->right);
-        delete node;  // Free memory
-    }
+    DatabaseNode* root = nullptr;
 
     // In-order traversal: takes in root
     void printInOrder(DatabaseNode* node) {
         if (node == nullptr) {
+            std::cout << "Tree is empty.\n";
             return; // Tree is empty
-        }
+        }//end if statement
         printInOrder(node->left);
         std::cout << node->toString();
         printInOrder(node->right);
-    }
+    }//end printInOrder
 
     // Add a node to BST based on ID number
     void addNode(DatabaseNode* newNode) {
@@ -137,7 +123,7 @@ public:
             std::cout << "Record added successfully.\n";
             std::cout << "Your ID number is: " << newNode->getIdNum() << "\n";
             return;
-        }
+        }//end if/else
 
         DatabaseNode* current = root;
         DatabaseNode* parent = nullptr;
@@ -151,29 +137,60 @@ public:
             } else { // Duplicate node
                 std::cout << "Node is a duplicate and cannot be placed.\n";
                 return;
-            }
-        }
+            }//end if/else
+        }//end while loop
 
         if (newNode->getIdNum() < parent->getIdNum()) {
             parent->left = newNode;
         } else {
             parent->right = newNode;
-        }
+        }//end if/else
         std::cout << "Record added successfully.\n";
         std::cout << "Your ID number is: " << newNode->getIdNum() << "\n";
-    }
-};
-
-class DatabaseMethods {
-public:
-
-    std::list<int> idNums;
+    }//end addNode
     
+    void userMethods(){
+        while(true) {
+            std::cout << "Menu\n";
+            std::cout << "1. Add\n";
+            std::cout << "2.Delete\n";
+            std::cout << "3. Modify\n";
+            std::cout << "4. Lookup\n";
+            std::cout << "5. List number of records.\n";
+            std::cout << "6. Exit\n";
+            int choice;
+            std::cin >> choice;
 
-    DatabaseMethods() {
-        // Constructor
-        
-    }
+            switch (choice)
+            {
+            case 1: // ADD method
+                createNode();
+                break;
+            
+            case 2: // DELETE method
+                std::cout <<"Delete";
+                break;
+            case 3: // MODIFY method
+                std::cout <<"modify";
+                break;
+            case 4: // LOOKUP method
+                std::cout <<"look up";
+                break;
+            case 5: //list number of records
+                //to wrok on
+                std::cout <<"list";
+                break;
+            case 6:
+                //ADD write to file
+                std::cout << "Exiting program...\n";
+                break;
+
+            default:
+                std::cout << "Invalid choice. Please try again.\n";    
+                break;    
+            }//end switch/case
+        } //end while loop
+    } //end userMethods
 
     int generateIdNum() {
         // Generate random ID number
@@ -189,16 +206,12 @@ public:
             // ID is already in the list
             std::uniform_int_distribution<> dist(100000000, 999999999);
             ID = dist(gen);
-        }
+        }//end if statement
 
         return ID;
-      
-    }
+    }//end generateIdNum
     
     void readFromFile(){ 
-        //used for the output of the tx file
-       AlizaMethods tree;
-    
        std::fstream ContactsList;
        std::string line;
        std::string substring;
@@ -216,80 +229,76 @@ public:
        ContactsList.open("Phonebook.txt");
        
        //read from txt file
-    
        if(ContactsList.is_open()) {
            
-           while (ContactsList.good()) {
-            
-            while(getline(ContactsList, line)) {
-    
-                phNum = "null";
-    
-                if (line.find("ID #") != std::string::npos) {
-                    data = line.substr(4);
-                    ID = std::stoi(data);
-                    //std::cout << ID << std::endl;
-                }
-                if (line.find("First Name: ") != std::string::npos) {
-                    data = line.substr(12);
-                    firstName = data;
-                    //std::cout << firstName << std::endl;
-                }
-                if (line.find("Last Name: ") != std::string::npos) {
-                    data = line.substr(11);
-                    lastName = data;
-                    //std::cout << lastName << std::endl;
-                }
-                if(line.find("Address: ") != std::string::npos) {
-                    data = line.substr(9);
-                    address = data;
-                    //std::cout << address << std::endl;
-                }
-                if (line.find("City: ") != std::string::npos) {
-                    data = line.substr(6);
-                    city = data;
-                   // std::cout << city << std::endl;
-                }
-                if (line.find("State: ") != std::string::npos) {
-                    data = line.substr(7);
-                    state = data;
-                    //std::cout << state << std::endl;
-                }
-                if (line.find("Zip Code: ") != std::string::npos) {
-                    data = line.substr(10);
-                    zip = std::stoi(data);
-                    //std::cout << zip << std::endl;
-                }
-                if (line.find("Email: ") != std::string::npos) {
-                    data = line.substr(7);
-                    email = data;
-                    //std::cout << email << std::endl;
-                }
-                if (line.find("Phone #: ") != std::string::npos) {
-                    data = line.substr(9);
-                    phNum = data;
-                    //std::cout << phNum << std::endl;
-                }
-                if (phNum != "null") { //so that a node will only be created once all the values are saved
-                    idNums.push_front(ID); //add IDs to list
-                    DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
-                    std::cout << contact.toString();
-                    DatabaseNode* contactPtr = &contact;
-                    tree.addNode(contactPtr);  
-                }                  
-            }
-        }
-    } else {
-        std::cout <<"unable to open file";
-    }
-    ContactsList.close();
-    } ; 
+            while (ContactsList.good()) {
+                
+                while(getline(ContactsList, line)) {
+        
+                    phNum = "null";
+        
+                    if (line.find("ID #") != std::string::npos) {
+                        data = line.substr(4);
+                        ID = std::stoi(data);
+                        //std::cout << ID << std::endl;
+                    }
+                    if (line.find("First Name: ") != std::string::npos) {
+                        data = line.substr(12);
+                        firstName = data;
+                        //std::cout << firstName << std::endl;
+                    }
+                    if (line.find("Last Name: ") != std::string::npos) {
+                        data = line.substr(11);
+                        lastName = data;
+                        //std::cout << lastName << std::endl;
+                    }
+                    if(line.find("Address: ") != std::string::npos) {
+                        data = line.substr(9);
+                        address = data;
+                        //std::cout << address << std::endl;
+                    }
+                    if (line.find("City: ") != std::string::npos) {
+                        data = line.substr(6);
+                        city = data;
+                    // std::cout << city << std::endl;
+                    }
+                    if (line.find("State: ") != std::string::npos) {
+                        data = line.substr(7);
+                        state = data;
+                        //std::cout << state << std::endl;
+                    }
+                    if (line.find("Zip Code: ") != std::string::npos) {
+                        data = line.substr(10);
+                        zip = std::stoi(data);
+                        //std::cout << zip << std::endl;
+                    }
+                    if (line.find("Email: ") != std::string::npos) {
+                        data = line.substr(7);
+                        email = data;
+                        //std::cout << email << std::endl;
+                    }
+                    if (line.find("Phone #: ") != std::string::npos) {
+                        data = line.substr(9);
+                        phNum = data;
+                        //std::cout << phNum << std::endl;
+                    }
+                    if (phNum != "null") { //so that a node will only be created once all the values are saved
+                        idNums.push_front(ID); //add IDs to list
+                        DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
+                        std::cout << contact.toString();
+                        DatabaseNode* contactPtr = &contact;
+                        addNode(contactPtr);  
+                    }//end if statements                
+                }//end while loop
+            }//end while loop
+        } else {
+            std::cout <<"unable to open file";
+        }//end if/else
+        ContactsList.close();
+    }//end readFromFile
     
     void createNode() {
-        AlizaMethods tree;
-        DatabaseMethods db;
-    
-        int ID = db.generateIdNum(); //generate id num
+        int ID = generateIdNum(); //generate id num
         std::string firstName;
         std::string lastName;
         std::string address;
@@ -320,14 +329,12 @@ public:
         idNums.push_front(ID);
         DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
         DatabaseNode* ptr = &contact; 
-        tree.addNode(ptr);
-    }
-    
-};
+        addNode(ptr);
+    }//end createNode
+};//end class DatabaseMethods
 
+//main method
 int main() {
-    // Initialize class
-    AlizaMethods aliza;
     DatabaseMethods db;
 
     DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
@@ -336,13 +343,11 @@ int main() {
     DatabaseNode* node2 = new DatabaseNode(156843154, "Sarah", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
         "semard@hotmail.com", "(773) 379-7548");
 
-    aliza.addNode(node1);
-    aliza.addNode(node2);
-    
-    
+    db.addNode(node1);
+    db.addNode(node2);
 
     std::cout << "\nPrinting database in order:\n";
-    aliza.printInOrder(aliza.root);
+    db.printInOrder(db.root);
 
     return 0;
-}
+}//end main method
