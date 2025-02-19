@@ -150,6 +150,39 @@ public:
         }//end while loop
     }//end printPreOrder
 
+    //Post order traversal: takes in root
+    void printPostOrder(){
+        if (root == nullptr) {
+            cout << "Empty Database";
+        } else {
+            stack<DatabaseNode*> stack;
+            DatabaseNode* current = root;
+            bool check = true;
+
+            while (true) { // infinite loop until break
+                // go to extreme left
+                while (current != nullptr && check) {
+                    stack.push(current);
+                    current = current->left;
+                }
+                if (stack.empty()) {
+                    break;
+                }
+                // to avoid infinite loop
+                if (current != stack.top()->right) {
+                    current = stack.top()->right;
+                    check = true;
+                    continue;
+                }
+                // if not caught in any above special case
+                current = stack.top();//return top of stack
+                stack.pop();//delete node on top of stack
+                cout << current->toString() + " ";
+                check = false;
+            } // end outer while loop
+        } // end if/else statement
+    }//end printPostOrder
+
     // Add a node to BST based on ID number
     void addNode(DatabaseNode* newNode) {
         if (root == nullptr) {
@@ -440,10 +473,16 @@ int main() {
     DatabaseMethods db;
 
     db.readFromFile(); //add nodes from text file
-    db.userMethods(); //user methods
+    //db.userMethods(); //user methods
 
-    std::cout << "\nPrinting database in order:\n";
-    db.printInOrder(db.root);
+    //std::cout << "\nPrinting database in order:\n";
+    //db.printInOrder(db.root);
+    //cout << "\n Printing database in pre-order: \n";
+    //db.printPreOrder(db.root);
+    cout << "\n Printing database in post-order: \n";
+    db.printPostOrder();
+
+    db.writeToFile();
 
     return 0;
 }//end main method

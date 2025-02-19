@@ -650,7 +650,7 @@ public class DatabaseMethods {
                 //System.out.print(current.getID() + " ");
                 check = false;
             } // end outer while loop
-        } // end it/else statement
+        } // end if/else statement
     }// end PrintPostOrder method
     // end LOOKUP methods //
 
