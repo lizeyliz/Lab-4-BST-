@@ -224,14 +224,16 @@ public:
     
     void userMethods(){
         while(true) {
+            int choice;
             std::cout << "Menu\n";
             std::cout << "1. Add\n";
-            std::cout << "2.Delete\n";
+            std::cout << "2. Delete\n";
             std::cout << "3. Modify\n";
             std::cout << "4. Lookup\n";
-            std::cout << "5. List number of records.\n";
-            std::cout << "6. Exit\n";
-            int choice;
+            std::cout << "5. List number of records\n";
+            std::cout << "6. Print out records in order\n";
+            std::cout << "7. Exit\n";
+            std::cout << "Enter your choice: ";
             std::cin >> choice;
 
             switch (choice)
@@ -241,27 +243,29 @@ public:
                 break;
             
             case 2: // DELETE method
-                std::cout <<"Delete";
+                deleteNode();
                 break;
             case 3: // MODIFY method
-                std::cout <<"modify";
+                modifyNode();
                 break;
-            case 4: // Print Phonebook method, select order
-                std::cout <<"print"; //FIXXXX
+            case 4: // LOOK UP method
+                lookupNode();
                 break;
             case 5: //list number of records
                 //to wrok on
-                std::cout <<"the number of records is: " << countRecords(root) << std::endl;
+                std::cout <<"Number of Records: " << countRecords(root) << std::endl;
                 break;
-            case 6:
-                //ADD write to file
-                std::cout << "Exiting program...\n";
+            case 6: //PRINT OUT records
+                printPhoneBook();
+                break;
+            case 7:
                 writeToFile();
-                break;
+                std::cout << "Exiting program...\n";
+                exit(0);
             
             default:
                 std::cout << "Invalid choice. Please try again.\n";    
-                break;    
+                   
             }//end switch/case
         } //end while loop
     } //end userMethods
@@ -382,7 +386,7 @@ public:
         std::string email;
         std::string phNum;
         
-        getline(std::cin, firstName); //clears buffer
+        std::cin.ignore(); // clear the input buffer
         std::cout << "Enter first name: \n";
         getline(std::cin, firstName);
         std::cout << "Enter last name: \n";
@@ -394,10 +398,11 @@ public:
         std::cout << "Enter state: \n";
         getline(std::cin, state);
         std::cout << "Enter zipcode: \n";
-        std::cin >> zip;
+        std::string zipStr;
+        getline(std::cin, zipStr);
+        zip = std::stoi(zipStr);
         std::cout << "Enter email: \n";
         getline(std::cin, email);
-        getline(std::cin, phNum);
         std::cout << "Enter phone number: \n";
         getline(std::cin, phNum);
       
@@ -513,11 +518,8 @@ public:
                     break;
 
                     default://number not in range (exception catching)
-                    cout << "Please enter an integer 1-3.";
-                    std::string input;
-                    std::getline(std::cin, input);
-                    choice = std::stoi(input);
-                    continue;
+                    cout << "Please enter an integer 1-3.\n";
+                    break;
                 }//end switch/case
             } catch (const std::invalid_argument& e) {
                 cout << "Please enter an integer 1-3.";
@@ -530,6 +532,137 @@ public:
         }//end while loop
         cout << "\n";
     }//end printPhoneBook
+
+    void lookupNode(){
+        std::cout << "Enter ID number of the record you want to lookup: ";
+        int idNum;
+        std::cin >> idNum;
+        DatabaseNode* node = search(idNum, root); //sets it to the node with that id number
+        if (node == nullptr) {
+            std::cout << "Record not found.\n";
+            return;
+        } else {
+            std::cout << node->toString();
+        }
+        
+    }
+
+    //modify a ndoe
+    void modifyNode(){
+
+        //get ID for node to modify
+        std::cout << "Enter ID number of the record you want to modify: ";
+        int idNum;
+        std::cin >> idNum;
+        DatabaseNode* node = search(idNum, root);
+
+        //search the tree for the node with that id number, and assign it to current
+        if (node == nullptr) {
+            std::cout << "Record with ID " << idNum << "not found.\n";
+            return;
+        }//end if statement
+
+        //give choice of what to modify
+        std::cout << "What data would you like to modify?\n";
+        std:: cout << "Choose one: 1) First Name 2) Last Name 3) Address 4) City 5) State 6) Zip Code 7) Email 8) Phone Number\n";
+        int userChoice;
+        std::cin >> userChoice;
+        std::cout << "Enter new value: ";
+        std::string newValue;
+        std::cin.ignore(); // clear the input buffer
+        getline(std::cin, newValue); //obtain new value
+
+        int temp;
+        switch (userChoice)
+        {
+        case 1:
+            node->setFirstName(newValue);
+            break;
+        case 2:
+            node->setLastName(newValue);
+            break;
+        case 3:
+            node->setAddress(newValue);
+            break;
+        case 4:
+            node->setCity(newValue);
+            break;
+        case 5:
+            node->setState(newValue);
+            break;
+        case 6: //have to convert to int
+            temp = std::stoi(newValue);
+            node->setZip(temp);
+            break;
+        case 7:
+            node->setEmail(newValue);
+            break;
+        case 8:
+            node->setPhNum(newValue);
+            break;
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+        std::cout << "Record modified successfully.\n";
+    } //end modifyNode
+
+    //delete method
+    void deleteNode(){
+        std::cout <<"Enter ID number of the record you want to delete: ";
+        int idNum;
+        std::cin >> idNum;
+
+        //check if node exitsts before attempting to delete
+        if (search(idNum, root) == nullptr) {
+            std::cout << "Record with ID " << idNum << "not found.\n";
+            return;
+        }//end if statement
+
+        root = deleteNode(root, idNum);
+        std::cout << "Record deleted successfully.\n";
+    }
+
+    //recursive delete helper method
+    DatabaseNode* deleteNode(DatabaseNode* root, int idNum) {
+
+        //base care: if tree is empty
+        if (root == nullptr) {
+            return nullptr;
+        }//end if statement
+
+        //if key to be searched is in a subtree
+        if (root->getIdNum() > idNum) {
+            root -> left = deleteNode(root -> left, idNum);
+        } else if (root->getIdNum() < idNum) {
+            root -> right = deleteNode(root -> right, idNum);
+        }
+        else {//if the root matches with the given idNUm
+            //Case 1: no child or only right child
+            if(root->left == nullptr && root->right == nullptr) {
+                DatabaseNode* temp = root->right;
+                delete root;
+                return temp;
+            }//end if statement
+
+            //Case 2: only left child
+            if(root->right == nullptr) {
+                DatabaseNode* temp = root->left;
+                delete root;
+                return temp;
+            }//end if statement
+
+            //when both children are present
+            DatabaseNode* successor = findMin(root->right);
+            root->setIdNum(successor->getIdNum()); //replace the value
+            root->right = deleteNode(root->right, successor->getIdNum()); //remove succesor
+
+        }
+
+        return root;
+
+    }
+
 };//end class DatabaseMethods
 
 
@@ -538,7 +671,7 @@ int main() {
     DatabaseMethods db;
 
     db.readFromFile(); //add nodes from text file
-    //db.userMethods(); //user methods
+    db.userMethods(); //user methods
 
     //std::cout << "\nPrinting database in order:\n";
     //db.printInOrder(db.root);
