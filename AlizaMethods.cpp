@@ -299,21 +299,21 @@ public:
         std::string email;
         std::string phNum;
     
-        std::cout << "Enter first name: ";
+        std::cout << "Enter first name: \n";
         getline(std::cin, firstName);
-        std::cout << "Enter last name: ";
+        std::cout << "Enter last name: \n";
         getline(std::cin, lastName);
-        std::cout << "Enter address: ";
+        std::cout << "Enter address: \n";
         getline(std::cin, address);
-        std::cout << "Enter city: ";
+        std::cout << "Enter city: \n";
         getline(std::cin, city);
-        std::cout << "Enter state:";
+        std::cout << "Enter state: \n";
         getline(std::cin, state);
-        std::cout << "Enter zipcode:";
+        std::cout << "Enter zipcode: \n";
         std::cin >> zip;
-        std::cout << "Enter email:";
+        std::cout << "Enter email: \n";
         std::cin >> email;
-        std::cout << "Enter phone number:";
+        std::cout << "Enter phone number: \n";
         getline(std::cin, phNum);
       
     
@@ -338,8 +338,7 @@ int main() {
 
     aliza.addNode(node1);
     aliza.addNode(node2);
-
-    db.createNode();
+    
     
 
     std::cout << "\nPrinting database in order:\n";
