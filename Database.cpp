@@ -467,7 +467,6 @@ public:
         MyFile.close();//close file
     }//end writeToFile
 
-    private:
     //searches for a node with a specific ID number: takes in id number and root
     DatabaseNode* search(int idNum, DatabaseNode* node){
         if (node == nullptr || node->getIdNum() == idNum) {
@@ -495,6 +494,9 @@ int main() {
     //db.printPreOrder(db.root);
     cout << "\n Printing database in post-order: \n";
     db.printPostOrder();
+
+    cout<< "searching for node 3\n";
+    cout<< db.search(3, db.root)->toString();
 
     db.writeToFile();
 
