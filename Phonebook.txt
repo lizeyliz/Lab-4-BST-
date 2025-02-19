@@ -1,3 +1,13 @@
+ID #123456789
+First Name: Claire
+Last Name: Stanton
+Address: 129 Maple St
+City: Auburn
+State: Washington
+Zip Code: 98231
+Email: puppylover702@gmail.com
+Phone #: (302)450-9231
+
 ID #256843154
 First Name: Patricia 
 Last Name: Emard
@@ -7,6 +17,16 @@ State: Illinois
 Zip Code: 60651
 Email: pemard@hotmail.com
 Phone #: (773) 379-7548
+
+ID #358689452
+First Name: Jimmy 
+Last Name: Schaden
+Address: 8401 Main St
+City: Edmonds
+State: Washington
+Zip Code: 98026
+Email: jschaden@gmail.com
+Phone #: (425) 712-0363
 
 ID #663784765
 First Name: Kendrick 
@@ -27,14 +47,3 @@ State: Washington
 Zip Code: 98115
 Email: brouge@gmail.com
 Phone #: (206)624-6454
-
-ID #358689452
-First Name: Jimmy 
-Last Name: Schaden
-Address: 8401 Main St
-City: Edmonds
-State: Washington
-Zip Code: 98026
-Email: jschaden@gmail.com
-Phone #: (425) 712-0363
-

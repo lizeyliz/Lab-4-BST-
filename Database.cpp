@@ -397,7 +397,7 @@ public:
             "Zip Code: " + to_string(contactVector[i]->getZip()) + "\n" + 
             "Email: " + contactVector[i]->getEmail() + "\n" + 
             "Phone #: " + contactVector[i]->getPhNum() + "\n\n";
-        }
+        }//end for loop
         MyFile.close();//close file
     }//end writeToFile
 };//end class DatabaseMethods
@@ -407,14 +407,6 @@ int main() {
     DatabaseMethods db;
 
     db.readFromFile(); //add nodes from text file
-
-    //print vector
-    /*cout << "Printing vector: \n ";
-    vector<DatabaseNode*> treeVector = db.inOrderVector();
-    for(size_t i = 0; i < treeVector.size(); i++){
-        cout << treeVector[i]->toString() << "\n";
-    }//end for loop
-    cout << "Vector printed\n";*/
 
     std::cout << "\nPrinting database in order:\n";
     db.printInOrder(db.root);
