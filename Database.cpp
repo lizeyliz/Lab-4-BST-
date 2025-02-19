@@ -174,7 +174,7 @@ public:
             switch (choice)
             {
             case 1: // ADD method
-                createNode();
+                addNode();
                 break;
             
             case 2: // DELETE method
@@ -188,11 +188,12 @@ public:
                 break;
             case 5: //list number of records
                 //to wrok on
-                std::cout <<"list";
+                std::cout <<"the number of records is: " << countRecords(root) << std::endl;
                 break;
             case 6:
                 //ADD write to file
                 std::cout << "Exiting program...\n";
+                writeToFile();
                 break;
 
             default:
@@ -317,7 +318,8 @@ public:
         int zip = 0;
         std::string email;
         std::string phNum;
-    
+        
+        getline(std::cin, firstName); //clears buffer
         std::cout << "Enter first name: \n";
         getline(std::cin, firstName);
         std::cout << "Enter last name: \n";
@@ -331,7 +333,7 @@ public:
         std::cout << "Enter zipcode: \n";
         std::cin >> zip;
         std::cout << "Enter email: \n";
-        std::cin >> email;
+        getline(std::cin, email);
         std::cout << "Enter phone number: \n";
         getline(std::cin, phNum);
       
@@ -407,6 +409,7 @@ int main() {
     DatabaseMethods db;
 
     db.readFromFile(); //add nodes from text file
+    db.userMethods(); //user methods
 
     std::cout << "\nPrinting database in order:\n";
     db.printInOrder(db.root);
