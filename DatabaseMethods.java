@@ -662,7 +662,7 @@ public class DatabaseMethods {
         return node;
     }
 
-    //searches for a node with a specific ID number
+    //searches for a node with a specific ID number: takes in id number and root
     private DatabaseNode search(int idNum, DatabaseNode node) {
         if (node == null || node.getID() == idNum) {
             return node;

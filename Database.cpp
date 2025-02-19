@@ -466,7 +466,21 @@ public:
         }//end for loop
         MyFile.close();//close file
     }//end writeToFile
+
+    private:
+    //searches for a node with a specific ID number: takes in id number and root
+    DatabaseNode* search(int idNum, DatabaseNode* node){
+        if (node == nullptr || node->getIdNum() == idNum) {
+            return node;
+        }
+        if (idNum < node->getIdNum()) {
+            return search(idNum, node->left);
+        } else {
+            return search(idNum, node->right);
+        }
+    }//end search
 };//end class DatabaseMethods
+
 
 //main method
 int main() {
