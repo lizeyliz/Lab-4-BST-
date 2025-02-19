@@ -284,10 +284,9 @@ public:
                     }
                     if (phNum != "null") { //so that a node will only be created once all the values are saved
                         idNums.push_front(ID); //add IDs to list
-                        DatabaseNode contact(ID, firstName, lastName, address, city, state, zip, email, phNum);
-                        std::cout << contact.toString();
-                        DatabaseNode* contactPtr = &contact;
-                        addNode(contactPtr);  
+                        DatabaseNode* contact = new DatabaseNode(ID, firstName, lastName, address, city, state, zip, email, phNum);
+                        std::cout << contact->toString();
+                        addNode(contact);  
                     }//end if statements                
                 }//end while loop
             }//end while loop
@@ -337,14 +336,15 @@ public:
 int main() {
     DatabaseMethods db;
 
-    DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
+    /*DatabaseNode* node1 = new DatabaseNode(256843154, "Pat", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
         "pemard@hotmail.com", "(773) 379-7548");
 
     DatabaseNode* node2 = new DatabaseNode(156843154, "Sarah", "Emard", "5137 W Chicago Ave", "Chicago", "Illinois", 60651,
-        "semard@hotmail.com", "(773) 379-7548");
+        "semard@hotmail.com", "(773) 379-7548");*/
 
-    db.addNode(node1);
-    db.addNode(node2);
+    //db.addNode(node1);
+    //db.addNode(node2);
+    db.readFromFile(); //add nodes from text file
 
     std::cout << "\nPrinting database in order:\n";
     db.printInOrder(db.root);
