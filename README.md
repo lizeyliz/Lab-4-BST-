@@ -11,7 +11,6 @@ This lab is improving on the BST lab we did last quarter. Link: https://github.c
 - Changed split lookupNode into printTree and lookup node methods (more accurately represents purpose)
 - added more execption catching
 - made user menu into method in DatabaseMethods (to clean up main)
-We created a Google Doc to plan changes we would make: https://docs.google.com/document/d/1d6Jf_s_rC1U1UfWqDoJ2wv5TNlRRl28p6hgQVTrcDoA/edit?usp=sharing
 
 ## Sources 
 - https://www.w3schools.com/java/java_files.asp
@@ -21,7 +20,6 @@ We created a Google Doc to plan changes we would make: https://docs.google.com/d
 - https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/
 - https://www.geeksforgeeks.org/tree-sort/
 - https://www.geeksforgeeks.org/cpp-binary-search-tree/ 
-C++
 - https://code.visualstudio.com/docs/languages/cpp
 - https://code.visualstudio.com/docs/cpp/config-clang-mac#_prerequisites 
 - https://www.geeksforgeeks.org/std-function-in-cpp/
@@ -34,3 +32,6 @@ C++
 - https://www.geeksforgeeks.org/string-find-in-cpp/#check-if-substring-exists 
 - https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/ 
 - https://www.w3schools.com/cpp/cpp_vectors.asp
+
+## Additional Notes
+We created a Google Doc to plan changes we would make: https://docs.google.com/document/d/1d6Jf_s_rC1U1UfWqDoJ2wv5TNlRRl28p6hgQVTrcDoA/edit?usp=sharing
