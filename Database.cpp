@@ -4,7 +4,9 @@
 #include <algorithm>
 #include <random>
 #include <list>
-#include <array>
+#include <stack>
+#include <vector>
+using namespace std;
 
 class DatabaseNode {
     private:
@@ -340,7 +342,7 @@ public:
     }//end createNode
 
     //prints count of contacts using recursion, takes in root
-    int countRecords(DatabaseNode* node) {
+    static int countRecords(DatabaseNode* node) {
         if (node == nullptr){
             return 0;
         }//base case
@@ -352,10 +354,30 @@ public:
         return total + 1;
     }//end countRecords
 
+    //iterative inorder traversal, returns vector of nodes inorder
+    std::vector<DatabaseNode*> inOrderVector(){//like inOrderArray method, but using vector
+        std::vector<DatabaseNode*> treeVector;//initialize
+        if (root == nullptr) { //tree is empty
+            return treeVector;//returns empty vector
+        }//end if statement
+        //fill vector: traverse in-order
+        stack<DatabaseNode*> stack;
+        DatabaseNode* current = root;
+        while (current != nullptr || !stack.empty()) {
+            //add left children to stack
+            while (current != nullptr) {
+                stack.push(current);
+                current = current->left;
+            }//end inner while loop
+            //stacks work differently in C++
+            current = stack.top();//return top element
+            stack.pop();//delete top element
+            treeVector.push_back(current);//putting at end of vector
+            //add right children to stack
+            current = current->left;
+        }//end outer while loop
+        return treeVector;
 
-    //iterative inorder traversal, returns array of nodes inorder
-    //needs count records
-    void inOrderArray(){
 
     }//end inOrderArray
 
