@@ -54,7 +54,7 @@ public class DatabaseMethods {
         DatabaseNode[] contactArray = inorderArray(root);
         try {
             FileWriter myWriter = new FileWriter("Phonebook.txt");
-            //write all contacts into file in alphabetical order according to last name
+            //write all contacts into file
             for (int i = 0; i < contactArray.length; i++) {
                 myWriter.write("ID #" + contactArray[i].getID() + "\n" + 
                 "First Name: " + contactArray[i].getFirstName() + "\n" + 

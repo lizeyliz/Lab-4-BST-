@@ -381,16 +381,30 @@ public:
 
     //puts all contact nodes from the tree into the txt file
     void writeToFile(){
-
+        // Create and open text file
+        ofstream MyFile("Phonebook.txt");
+        //put contact nodes from tree into vector (inorder)
+        vector<DatabaseNode*> contactVector = inOrderVector();//vector to iterate through
+        //write to file
+        for (size_t i = 0; i < contactVector.size(); i++){//go through vector elements
+            //write a contact into the file
+            MyFile << "ID #" + to_string(contactVector[i]->getIdNum()) + "\n" + 
+            "First Name: " + contactVector[i]->getFirstName() + "\n" + 
+            "Last Name: " + contactVector[i]->getLastName() + "\n" + 
+            "Address: " + contactVector[i]->getAddress() + "\n" + 
+            "City: " + contactVector[i]->getCity() + "\n" + 
+            "State: " + contactVector[i]->getState() + "\n" + 
+            "Zip Code: " + to_string(contactVector[i]->getZip()) + "\n" + 
+            "Email: " + contactVector[i]->getEmail() + "\n" + 
+            "Phone #: " + contactVector[i]->getPhNum() + "\n\n";
+        }
+        MyFile.close();//close file
     }//end writeToFile
 };//end class DatabaseMethods
 
 //main method
 int main() {
     DatabaseMethods db;
-
-    
-    
 
     db.readFromFile(); //add nodes from text file
 
