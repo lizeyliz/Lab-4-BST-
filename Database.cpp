@@ -94,7 +94,9 @@ class DatabaseNode {
     }
     //to string (may change later)
     std::string toString(){
-        return std::to_string(idNum) + " " + firstName + " " + lastName + " " + address + " " + city + " " + state + " " + std::to_string(zip) + " " + email + " " + phNum +"\n";
+        return "ID#" + std::to_string(idNum) + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + 
+        "\nAddress: " + address + "\nCity: " + city + "\nState: " + state + "\n Zip Code:" 
+        + std::to_string(zip) + "\nEmail: " + email + "\nPhone #: " + phNum +"\n\n";
     }//end toString
 };//end class DatabaseNode
 
@@ -108,7 +110,6 @@ public:
     // In-order traversal: takes in root
     void printInOrder(DatabaseNode* node) {
         if (node == nullptr) {
-            std::cout << "Tree is empty.\n";
             return; // Tree is empty
         }//end if statement
         printInOrder(node->left);
