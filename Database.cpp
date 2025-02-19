@@ -487,49 +487,49 @@ public:
         return node;
     }//end finMin
 
-        // print phonebook in traversal order user chooses
-        void printPhoneBook() {
-            //setting up user input
-            int choice;
-            std::cin >> choice;
-            while(true){
-                try {
-                    cout << "Which order would you like to use?";
-                    cout << "1) Pre-order";
-                    cout << "2) Post-order";
-                    cout << "3) In-order";
-    
-                    switch(choice) {
-                        case 1://preorder
-                        printPreOrder(root);
-                        break;
-    
-                        case 2://postorder
-                        printPostOrder();
-                        break;
-    
-                        case 3://inorder
-                        printInOrder(root);
-                        break;
-    
-                        default://number not in range (exception catching)
-                        cout << "Please enter an integer 1-3.";
-                        std::string input;
-                        std::getline(std::cin, input);
-                        choice = std::stoi(input);
-                        continue;
-                    }//end switch/case
-                } catch (const std::invalid_argument& e) {
+    // print phonebook in traversal order user chooses
+    void printPhoneBook() {
+        //setting up user input
+        int choice;
+        while(true){
+            try {
+                cout << "Which order would you like to use?\n";
+                cout << "1) Pre-order\n";
+                cout << "2) Post-order\n";
+                cout << "3) In-order\n";
+                std::cin >> choice;
+
+                switch(choice) {
+                    case 1://preorder
+                    printPreOrder(root);
+                    break;
+
+                    case 2://postorder
+                    printPostOrder();
+                    break;
+
+                    case 3://inorder
+                    printInOrder(root);
+                    break;
+
+                    default://number not in range (exception catching)
                     cout << "Please enter an integer 1-3.";
                     std::string input;
                     std::getline(std::cin, input);
                     choice = std::stoi(input);
                     continue;
-                }//end try/catch
-                break;
-            }//end while loop
-            cout << "\n";
-        }//end printPhoneBook
+                }//end switch/case
+            } catch (const std::invalid_argument& e) {
+                cout << "Please enter an integer 1-3.";
+                std::string input;
+                std::getline(std::cin, input);
+                choice = std::stoi(input);
+                continue;
+            }//end try/catch
+            break;
+        }//end while loop
+        cout << "\n";
+    }//end printPhoneBook
 };//end class DatabaseMethods
 
 
@@ -545,11 +545,14 @@ int main() {
     //cout << "\n Printing database in pre-order: \n";
     //db.printPreOrder(db.root);
 
-    cout<< "searching for node 3\n";
-    cout<< db.search(3, db.root)->toString();
+    //cout<< "searching for node 3\n";
+    //cout<< db.search(3, db.root)->toString();
 
-    cout<< "node with lowest id num in tree\n";
-    cout << db.findMin(db.root)->toString();
+    //cout<< "node with lowest id num in tree\n";
+    //cout << db.findMin(db.root)->toString();
+
+    cout << "Print phonebook:\n";
+    db.printPhoneBook();
 
     db.writeToFile();
 
