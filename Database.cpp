@@ -183,8 +183,8 @@ public:
             case 3: // MODIFY method
                 std::cout <<"modify";
                 break;
-            case 4: // LOOKUP method
-                std::cout <<"look up";
+            case 4: // Print Phonebook method, select order
+                std::cout <<"print"; //FIXXXX
                 break;
             case 5: //list number of records
                 //to wrok on
@@ -195,7 +195,7 @@ public:
                 std::cout << "Exiting program...\n";
                 writeToFile();
                 break;
-
+            
             default:
                 std::cout << "Invalid choice. Please try again.\n";    
                 break;    
