@@ -6,7 +6,7 @@
 #include <list>
 #include <stack>
 #include <vector>
-using namespace std;
+using namespace std;//so you don't have to write std all the time
 
 class DatabaseNode {
     private:
@@ -355,8 +355,8 @@ public:
     }//end countRecords
 
     //iterative inorder traversal, returns vector of nodes inorder
-    std::vector<DatabaseNode*> inOrderVector(){//like inOrderArray method, but using vector
-        std::vector<DatabaseNode*> treeVector;//initialize
+    vector<DatabaseNode*> inOrderVector(){//like inOrderArray method, but using vector
+        vector<DatabaseNode*> treeVector;//initialize
         if (root == nullptr) { //tree is empty
             return treeVector;//returns empty vector
         }//end if statement
@@ -374,12 +374,10 @@ public:
             stack.pop();//delete top element
             treeVector.push_back(current);//putting at end of vector
             //add right children to stack
-            current = current->left;
+            current = current->right;
         }//end outer while loop
         return treeVector;
-
-
-    }//end inOrderArray
+    }//end inOrderVector
 
     //puts all contact nodes from the tree into the txt file
     void writeToFile(){
@@ -390,9 +388,19 @@ public:
 //main method
 int main() {
     DatabaseMethods db;
+
+    
     
 
     db.readFromFile(); //add nodes from text file
+
+    //print vector
+    /*cout << "Printing vector: \n ";
+    vector<DatabaseNode*> treeVector = db.inOrderVector();
+    for(size_t i = 0; i < treeVector.size(); i++){
+        cout << treeVector[i]->toString() << "\n";
+    }//end for loop
+    cout << "Vector printed\n";*/
 
     std::cout << "\nPrinting database in order:\n";
     db.printInOrder(db.root);
