@@ -698,7 +698,7 @@ public class DatabaseMethods {
         return idNum;
     }// end generateID metho
 
-    //prints count using recursion
+    //prints count of contacts using recursion, takes in root
     public int countRecords(DatabaseNode node) {
         if (node == null) {
             return 0;//base case

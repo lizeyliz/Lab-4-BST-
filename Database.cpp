@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <random>
 #include <list>
+#include <array>
 
 class DatabaseNode {
     private:
@@ -338,16 +339,36 @@ public:
         return contact;
     }//end createNode
 
+    //prints count of contacts using recursion, takes in root
+    int countRecords(DatabaseNode* node) {
+        if (node == nullptr){
+            return 0;
+        }//base case
+        // Traverse left subtree
+        int left = countRecords(node->left);
+        // Traverse right subtree
+        int right = countRecords(node->right);
+        int total = left + right;
+        return total + 1;
+    }//end countRecords
+
+
+    //iterative inorder traversal, returns array of nodes inorder
+    //needs count records
+    void inOrderArray(){
+
+    }//end inOrderArray
 
     //puts all contact nodes from the tree into the txt file
     void writeToFile(){
 
-    }
+    }//end writeToFile
 };//end class DatabaseMethods
 
 //main method
 int main() {
     DatabaseMethods db;
+    
 
     db.readFromFile(); //add nodes from text file
 
