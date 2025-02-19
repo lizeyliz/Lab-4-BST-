@@ -505,27 +505,8 @@ public class DatabaseMethods {
         System.out.println("Record modified successfully.");      
     }  // end MODIFY method //
 
-    // LOOKUP method
-    public void lookupNode() {
-        int idNum;
-        while(true){
-            try {
-                System.out.print("Enter ID number to lookup: ");
-                idNum = scanner.nextInt();
-                scanner.nextLine(); // to get next line
-                break;
-            } catch (Exception InputMismatchException) {
-                System.out.println("Please enter an integer.");
-                scanner.nextLine();
-                continue;
-            }//end try/catch
-        }//end while loop
-
-        DatabaseNode node = search(idNum, root);
-        if (node == null) {
-            System.out.println("Record not found.");
-            return;
-        }
+    // print phonebook in traversal order user chooses
+    public void printPhoneBook() {
         while(true){
             try {
                 System.out.println("Which order would you like to use?");
@@ -718,7 +699,7 @@ public class DatabaseMethods {
             System.out.println("1. Add");
             System.out.println("2. Delete");
             System.out.println("3. Modify");
-            System.out.println("4. Lookup");
+            System.out.println("4. Print Phonebook");
             System.out.println("5. List number of records");
             System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
@@ -735,8 +716,8 @@ public class DatabaseMethods {
                 case 3: // MODIFY method
                     database.modifyNode();
                     break;
-                case 4: // LOOKUP method
-                    database.lookupNode();
+                case 4: // print phonebook in order user chooses
+                    database.printPhoneBook();
                     break;
                 case 5:
                     System.out.println("Number of records: " 
