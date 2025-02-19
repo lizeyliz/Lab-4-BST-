@@ -2,15 +2,18 @@
 - Aliza and Sarah
 - CS 240
 - 2/19/25
-##Purpose
+## Purpose
 This program creates an address book of people and their contact information that can be sorted 3 ways (inorder, preorder, postorder). A user can add, delete, and modify a record providing they know the record key. The number of records (nodes) can be counted.
-##Improvements
+## Improvements
 This lab is improving on the BST lab we did last quarter. Link: https://github.com/lizeyliz/6-Binary-Search-Tree.git
 - Createed a version of lab in C++
-- Sorting tree each time you export it to txt file
-- Changed lookupNode to printPhonebook bc this is a more accurate description of what it does
+- adding a text file to hold contacts with input/output
+- Changed split lookupNode into printTree and lookup node methods (more accurately represents purpose)
+- added more execption catching
+- made user menu into method in DatabaseMethods (to clean up main)
+We created a Google Doc to plan changes we would make: https://docs.google.com/document/d/1d6Jf_s_rC1U1UfWqDoJ2wv5TNlRRl28p6hgQVTrcDoA/edit?usp=sharing
 
-##Sources 
+## Sources 
 - https://www.w3schools.com/java/java_files.asp
 - https://www.w3schools.com/java/java_files_read.asp
 - https://www.geeksforgeeks.org/java-io-input-output-in-java-with-examples/
@@ -30,4 +33,4 @@ C++
 - https://www.w3schools.com/cpp/cpp_strings_input.asp
 - https://www.geeksforgeeks.org/string-find-in-cpp/#check-if-substring-exists 
 - https://www.geeksforgeeks.org/how-to-generate-random-number-in-range-in-cpp/ 
-- https://www.w3schools.com/cpp/cpp_vectors.asp 
+- https://www.w3schools.com/cpp/cpp_vectors.asp
