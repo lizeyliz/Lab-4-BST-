@@ -7,7 +7,6 @@
 #include <stack>
 #include <vector>
 using namespace std;//so you don't have to write std all the time
-
 class DatabaseNode {
     private:
     //instance variables
@@ -105,9 +104,7 @@ class DatabaseNode {
 
 class DatabaseMethods {
 public:
-
     std::list<int> idNums;
-
     DatabaseNode* root = nullptr;
 
     // In-order traversal: takes in root
@@ -308,11 +305,8 @@ public:
        
        //read from txt file
        if(ContactsList.is_open()) {
-           
             while (ContactsList.good()) {
-                
                 while(getline(ContactsList, line)) {
-        
                     phNum = "null";
         
                     if (line.find("ID #") != std::string::npos) {
@@ -405,7 +399,6 @@ public:
         getline(std::cin, email);
         std::cout << "Enter phone number: \n";
         getline(std::cin, phNum);
-      
     
         idNums.push_front(ID);
         DatabaseNode* contact = new DatabaseNode(ID, firstName, lastName, address, city, state, zip, email, phNum);
@@ -543,13 +536,11 @@ public:
             return;
         } else {
             std::cout << node->toString();
-        }
-        
-    }
+        }//end if/else
+    }//end lookupNode
 
     //modify a ndoe
     void modifyNode(){
-
         //get ID for node to modify
         std::cout << "Enter ID number of the record you want to modify: ";
         int idNum;
@@ -621,12 +612,11 @@ public:
 
         root = deleteNode(root, idNum);
         std::cout << "Record deleted successfully.\n";
-    }
+    }//end deleteNode
 
     //recursive delete helper method
     DatabaseNode* deleteNode(DatabaseNode* root, int idNum) {
-
-        //base care: if tree is empty
+        //base case: if tree is empty
         if (root == nullptr) {
             return nullptr;
         }//end if statement
@@ -636,8 +626,7 @@ public:
             root -> left = deleteNode(root -> left, idNum);
         } else if (root->getIdNum() < idNum) {
             root -> right = deleteNode(root -> right, idNum);
-        }
-        else {//if the root matches with the given idNUm
+        } else {//if the root matches with the given idNUm
             //Case 1: no child or only right child
             if(root->left == nullptr && root->right == nullptr) {
                 DatabaseNode* temp = root->right;
@@ -656,38 +645,16 @@ public:
             DatabaseNode* successor = findMin(root->right);
             root->setIdNum(successor->getIdNum()); //replace the value
             root->right = deleteNode(root->right, successor->getIdNum()); //remove succesor
-
-        }
-
+        }//end if/else
         return root;
-
-    }
-
+    }//end deleteNode
 };//end class DatabaseMethods
-
 
 //main method
 int main() {
-    DatabaseMethods db;
-
+    DatabaseMethods db;//initializing instance of DatabaseMethods class
     db.readFromFile(); //add nodes from text file
     db.userMethods(); //user methods
-
-    //std::cout << "\nPrinting database in order:\n";
-    //db.printInOrder(db.root);
-    //cout << "\n Printing database in pre-order: \n";
-    //db.printPreOrder(db.root);
-
-    //cout<< "searching for node 3\n";
-    //cout<< db.search(3, db.root)->toString();
-
-    //cout<< "node with lowest id num in tree\n";
-    //cout << db.findMin(db.root)->toString();
-
-    cout << "Print phonebook:\n";
-    db.printPhoneBook();
-
-    db.writeToFile();
-
+    db.writeToFile();//once user exits program, write new tree to txt file
     return 0;
 }//end main method
